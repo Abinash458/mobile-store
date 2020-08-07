@@ -94,7 +94,7 @@ export default ProductDetail;
 const ProductDetailWrapper = styled.div`
     .card {
         position: relative;
-        background-color: #122936;
+        background-color: var(--headerFooterBackground);
         border-radius: 20px;
         overflow: hidden;
     }

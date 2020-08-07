@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 
+import { Switch, Route, Redirect } from 'react-router-dom';
+
 import { storeProducts } from '../../shared/productsData';
 
 import Header from '../Header/Header';
+import Home from '../Home/Home';
 import ProductList from '../ProductList/ProductList';
-import ProductDetail from "../ProductDetail/ProductDetail";
+// import ProductDetail from "../ProductDetail/ProductDetail";
 import Footer from "../Footer/Footer";
 
 export default class ComponentWrapper extends Component {
@@ -13,26 +16,38 @@ export default class ComponentWrapper extends Component {
         super(props);
         this.state = {
             products: storeProducts,
-            selectedProduct: null,
+            // selectedProduct: null,
         }
     }
 
-    getItem = (productId) => {
-        const product = this.state.products.find((item) => item.id === productId);
-        return product;
-    };
+    // getItem = (productId) => {
+    //     const product = this.state.products.find((item) => item.id === productId);
+    //     return product;
+    // };
 
-    handleDetail = (productId) => {
-        const product = this.getItem(productId);
-        this.setState({ selectedProduct: product });
-    }
+    // handleDetail = (productId) => {
+    //     const product = this.getItem(productId);
+    //     this.setState({ selectedProduct: product });
+    // }
 
     render() {
+
+        const HomePage = () => {
+            return (
+                <Home />
+            );
+        }
+
         return (
             <div>
                 <Header />
-                <ProductList products={this.state.products} handleDetail={this.handleDetail} />
-                <ProductDetail product={this.state.selectedProduct} />
+                <Switch>
+                    <Route path="/home" component={HomePage} />
+                    <Route exact path="/shop" component={() => <ProductList products={this.state.products} />} />
+                    <Redirect to="/home" />
+                </Switch>
+                {/* <ProductList products={this.state.products} handleDetail={this.handleDetail} /> */}
+                {/* <ProductDetail product={this.state.selectedProduct} /> */}
                 <Footer />
             </div>
         )

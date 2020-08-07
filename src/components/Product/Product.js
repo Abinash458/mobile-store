@@ -4,58 +4,58 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 
 const Product = (props) => {
-    const { id, title, image, price, inCart } = props.product;
-    return (
-        <ProductWrapper key={id} className="col-9 mx-auto col-md-6 col-lg-3 my-3">
-            <div className="card">
-                <div
-                    className="img-container p-5"
-                    onClick={() => props.handleDetail(id)}
-                >
-                    {/* <Link to="/details"> */}
-                    <img src={image} alt="productImage" className="card-img-top" />
-                    {/* </Link> */}
-                </div>
-                <div className="card-footer d-flex justify-content-between">
-                    <p className="align-self-center mb-0 card-title">{title}</p>
-                    <h5 className="text-blue font-italic mb-0 price">
-                        <span className="mr-1">&#8377;</span>
-                        {price}
-                    </h5>
-                    <button disabled={inCart ? true : false}
-                        // onClick={() => {
-                        //     this.props.addToCart(id);
-                        //     this.props.openModal(id);
-                        // }}
-                        className="buy">{inCart ? (
-                            <p className="text-capitalize mb-0" disabled>
-                                in cart
-                            </p>
-                        ) : (
-                                <i className="fas fa-cart-plus" />
-                            )}</button>
-                </div>
-            </div>
-        </ProductWrapper>
-    )
+  const { id, title, image, price, inCart } = props.product;
+  return (
+    <ProductWrapper key={id} className="col-9 mx-auto col-md-6 col-lg-3 my-3">
+      <div className="card">
+        <div
+          className="img-container p-5"
+          onClick={() => props.handleDetail(id)}
+        >
+          {/* <Link to="/details"> */}
+          <img src={image} alt="productImage" className="card-img-top" />
+          {/* </Link> */}
+        </div>
+        <div className="card-footer d-flex justify-content-between">
+          <p className="align-self-center mb-0 card-title">{title}</p>
+          <h5 className="text-blue font-italic mb-0 price">
+            <span className="mr-1">&#8377;</span>
+            {price}
+          </h5>
+          <button disabled={inCart ? true : false}
+            // onClick={() => {
+            //     this.props.addToCart(id);
+            //     this.props.openModal(id);
+            // }}
+            className="buy">{inCart ? (
+              <p className="text-capitalize mb-0" disabled>
+                in cart
+              </p>
+            ) : (
+                <i className="fas fa-cart-plus" />
+              )}</button>
+        </div>
+      </div>
+    </ProductWrapper>
+  )
 }
 
 export default Product;
 
 Product.propTypes = {
-    product: PropTypes.shape({
-        id: PropTypes.number,
-        img: PropTypes.string,
-        title: PropTypes.string,
-        price: PropTypes.number,
-        inCart: PropTypes.bool,
-    }).isRequired,
+  product: PropTypes.shape({
+    id: PropTypes.number,
+    img: PropTypes.string,
+    title: PropTypes.string,
+    price: PropTypes.number,
+    inCart: PropTypes.bool,
+  }).isRequired,
 };
 
 const ProductWrapper = styled.div`
   .card {
     position: relative;
-    background-color: #122936;
+    background-color: var(--headerFooterBackground);
     border-radius: 20px;
     overflow: hidden;
   }
@@ -65,7 +65,7 @@ const ProductWrapper = styled.div`
     top: -50%;
     width: 100%;
     height: 100%;
-    background-color: #2196f3;
+    background-color: var(--secondaryBackground);
     transform: skewY(345deg);
     transition: 0.5s;
   }
@@ -83,7 +83,7 @@ const ProductWrapper = styled.div`
       /* box-shadow: 2px 2px 5px 0px rgba(33,150,243, 0.7); */
     }
     .card-footer {
-      background: #2196f3;
+      background: var(--secondaryBackground);
     }
   }
   .img-container {
@@ -113,13 +113,12 @@ const ProductWrapper = styled.div`
       opacity: 0;
       padding: 10px 30px;
       color: var(--mainWhite);
-      background-color: #2196f3;
+      background-color: var(--secondaryBackground);
       margin-top: 15px;
       border-radius: 30px;
       border: none;
       outline: none;
       text-transform: uppercase;
-      /* letter-spacing: 1px; */
       transition: 0.5s;
   } 
   .card:hover .buy {

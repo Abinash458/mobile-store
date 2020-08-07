@@ -5,6 +5,10 @@
   --mainDark: #232528;
   --mainYellow: #ffa400;
 
+  --primaryBackground: #09161d;
+  --secondaryBackground: #2196f3;
+  --headerFooterBackground: #122936;
+
   --darkTheme: black;
   --darkThemeText: white;
 
@@ -21,7 +25,7 @@
 body,
 html {
   font-family: "Poppins", sans-serif !important;
-  background-color: #09161d;
+  background-color: var(--primaryBackground);
 }
 
 body {
@@ -80,7 +84,7 @@ body {
 }
 
 .footer{
-    background-color: #122936;
+    background-color: var(--headerFooterBackground);
     color: var(--mainWhite);
     font-family: "Poppins", sans-serif !important;
     margin:0px auto;
@@ -89,7 +93,7 @@ body {
 .jumbotron {
     padding:70px 30px 70px 30px;
     margin:0px auto;
-    background-color: #122936;
+    background-color: var(--headerFooterBackground);
     color: var(--mainWhite);
 }
 

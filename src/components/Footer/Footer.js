@@ -1,4 +1,6 @@
-import React from 'react'
+import React from 'react';
+
+import { Link } from 'react-router-dom';
 
 export default function Footer(props) {
     return (
@@ -8,10 +10,9 @@ export default function Footer(props) {
                     <div className="col-4 offset-1 col-sm-2">
                         <h5>Links</h5>
                         <ul className="list-unstyled">
-                            <li><a href="/home">Home</a></li>
-                            {/* <li><a href="#">About</a></li> */}
-                            <li><a href="/shop">Shop</a></li>
-                            <li><a href="/contactus">Contact</a></li>
+                            <li><Link to="/home">Home</Link></li>
+                            <li><Link to="/shop">Shop</Link></li>
+                            <li><Link to="/contactus">Contact</Link></li>
                         </ul>
                     </div>
                     <div className="col-7 col-sm-5">
