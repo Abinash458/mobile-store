@@ -1,5 +1,7 @@
 import React from 'react'
 import styled from "styled-components";
+import { Link } from "react-router-dom";
+import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 
 
 const RenderComment = ({ comments }) => {
@@ -66,6 +68,20 @@ const ProductDetail = (props) => {
                 <div className="py-4">
                     <div className="container">
                         <div className="row">
+                            <Breadcrumb>
+                                <BreadcrumbItem>
+                                    <Link to="/shop">Shop</Link>
+                                </BreadcrumbItem>
+                                <BreadcrumbItem active>
+                                    {props.product.title}
+                                </BreadcrumbItem>
+                            </Breadcrumb>
+                            <div className="col-12 text-white">
+                                <h3>{props.product.title}</h3>
+                                <hr />
+                            </div>
+                        </div>
+                        <div className="row">
                             <div className="col-md-6">
                                 <RenderProduct product={props.product} />
                             </div>
@@ -74,7 +90,8 @@ const ProductDetail = (props) => {
                                 <h4 className="text-white text-uppercase mt-3 mb-2">
                                     made by: <span className="text-uppercase">{props.product.company}</span>
                                 </h4>
-                                <RenderComment comments={props.product.comments} />
+                                <RenderComment comments={props.comments} />
+                                {/* {console.log(props.comments)} */}
                             </div>
                         </div>
                     </div>

@@ -22,6 +22,14 @@
   box-sizing: border-box;
 }
 
+hr {
+  background-color: #ffffff;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
 body,
 html {
   font-family: "Poppins", sans-serif !important;
