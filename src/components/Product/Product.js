@@ -5,26 +5,6 @@ import PropTypes from "prop-types";
 
 export default class Product extends Component {
 
-    handleDetail = (product) => {
-        this.setState({ selectedProduct: product })
-    }
-
-    renderProduct = (product) => {
-        if (product != null) {
-            return (
-                <div className="card mx-auto">
-                    <div className="img-container p-5">
-                        <img src={product.image} alt="productImage" className="card-img-top" />
-                        <p>{product.title}</p>
-                        <p>{product.info}</p>
-                    </div>
-                </div>
-            );
-        } else {
-            return (
-                <div></div>);
-        }
-    }
     render() {
         const { id, title, image, price, inCart } = this.props.product;
         return (
@@ -32,7 +12,7 @@ export default class Product extends Component {
                 <div className="card">
                     <div
                         className="img-container p-5"
-                        onClick={() => this.props.handleDetail(this.props.product)}
+                        onClick={() => this.props.handleDetail(id)}
                     >
                         {/* <Link to="/details"> */}
                         <img src={image} alt="productImage" className="card-img-top" />
