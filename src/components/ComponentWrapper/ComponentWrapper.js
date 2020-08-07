@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 
-import { Navbar, NavbarBrand } from 'reactstrap';
-
 import { storeProducts } from '../../shared/productsData';
+
+import Header from '../Header/Header';
 import ProductList from '../ProductList/ProductList';
 import ProductDetail from "../ProductDetail/ProductDetail";
+import Footer from "../Footer/Footer";
 
 export default class ComponentWrapper extends Component {
 
@@ -29,13 +30,10 @@ export default class ComponentWrapper extends Component {
     render() {
         return (
             <div>
-                <Navbar dark color="primary">
-                    <div className="container">
-                        <NavbarBrand href="/">Product</NavbarBrand>
-                    </div>
-                </Navbar>
+                <Header />
                 <ProductList products={this.state.products} handleDetail={this.handleDetail} />
                 <ProductDetail product={this.state.selectedProduct} />
+                <Footer />
             </div>
         )
     }

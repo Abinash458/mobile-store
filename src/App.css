@@ -66,3 +66,38 @@ body {
   font-size: 1.2rem;
   color: var(--mainYellow) !important;
 }
+
+.row-header{
+    margin:0px auto;
+    padding:0px auto;
+}
+
+.row-content {
+    margin:0px auto;
+    padding: 50px 0px 50px 0px;
+    border-bottom: 1px ridge;
+    min-height:400px;
+}
+
+.footer{
+    background-color: #122936;
+    color: var(--mainWhite);
+    font-family: "Poppins", sans-serif !important;
+    margin:0px auto;
+    padding: 20px 0px 20px 0px;
+}
+.jumbotron {
+    padding:70px 30px 70px 30px;
+    margin:0px auto;
+    background-color: #122936;
+    color: var(--mainWhite);
+}
+
+address{
+    font-size:80%;
+    margin:0px;
+}
+
+.navbar-dark {
+    background-color: #09161d;
+}
