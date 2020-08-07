@@ -23,7 +23,7 @@ const RenderComment = ({ comments }) => {
     })
     return (
         <div>
-            <h2 className='py-4 text-white'>Comments</h2>
+            <h5 className='py-4 text-white'>Comments:</h5>
             <ul className='list-unstyled'>
                 {cmnts}
             </ul>
@@ -40,8 +40,14 @@ const RenderProduct = ({ product }) => {
                         <img src={product.image} alt="productImage" className="card-img-top" />
                     </div>
                     <div className="card-footer">
-                        <h3>{product.title}</h3>
-                        <p>{product.info}</p>
+                        <div className="d-flex justify-content-between">
+                            <h3 className="align-self-center">{product.title}</h3>
+                            <h3 className="font-italic">
+                                <span className="mr-1">&#8377;</span>
+                                {product.price}
+                            </h3>
+                        </div>
+                        <p className="my-2 text-center">{product.info}</p>
                     </div>
                 </div>
             </ProductDetailWrapper>
@@ -63,7 +69,11 @@ const ProductDetail = (props) => {
                             <div className="col-md-6">
                                 <RenderProduct product={props.product} />
                             </div>
-                            <div className="col-md-6">
+                            <div className="col-md-6 py-4">
+                                <h2 className="text-white text-capitalize">model: {props.product.title}</h2>
+                                <h4 className="text-white text-uppercase mt-3 mb-2">
+                                    made by: <span className="text-uppercase">{props.product.company}</span>
+                                </h4>
                                 <RenderComment comments={props.product.comments} />
                             </div>
                         </div>
