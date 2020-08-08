@@ -5,22 +5,21 @@ import { Link } from "react-router-dom";
 
 
 const RenderModal = (props) => {
-    // const { image, title, price } = props.props.modalProduct;
-    console.log(props)
-    if (props.props.modalProduct != null) {
+    const { image, title, price } = props.props.product;
+    if (props.props.product != null) {
         return (
             <ModalContainer >
                 <div className="container">
                     <div className="row">
                         <div id="modal" className="col-8 mx-auto col-md-6 col-lg-4 text-center text-capitalize p-5">
-                            {/* <h5>item added to the cart</h5>
+                            <h5>item added to the cart</h5>
                             <img src={image} className="img-fluid" alt="product" />
                             <h5> {title} </h5>
                             <h5 className="text-muted">price: &#8377;{price}</h5>
                             <Link to="/shop">
                                 <ButtonContainer
                                     onClick={() => {
-                                        props.props.closeModal();
+                                        props.props.toggleModal();
                                     }}
                                 >
                                     back
@@ -30,12 +29,12 @@ const RenderModal = (props) => {
                                 <ButtonContainer
                                     cart
                                     onClick={() => {
-                                        props.props.closeModal();
+                                        props.props.toggleModal();
                                     }}
                                 >
                                     go to cart
                             </ButtonContainer>
-                            </Link> */}
+                            </Link>
                         </div>
                     </div>
                 </div>
@@ -43,24 +42,7 @@ const RenderModal = (props) => {
         );
     } else {
         return (
-            <ModalContainer >
-                <div className="container">
-                    <div className="row">
-                        <div id="modal" className="col-8 mx-auto col-md-6 col-lg-4 text-center text-capitalize p-5">
-                            <h3 className="text-danger"> Error </h3>
-                            <Link to="/shop">
-                                <ButtonContainer
-                                    onClick={() => {
-                                        props.props.closeModal();
-                                    }}
-                                >
-                                    back
-                            </ButtonContainer>
-                            </Link>
-                        </div>
-                    </div>
-                </div>
-            </ModalContainer>
+            <div></div>
         );
     }
 }

@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 
-// import { ButtonContainer } from '../StyledComponents/Button';
+import { ButtonContainer } from '../StyledComponents/Button';
+import Modal from "../Cart/components/GotoCartModal";
 
 const RenderComment = ({ comments }) => {
     if (comments == null) {
@@ -64,7 +65,14 @@ const RenderProduct = (props) => {
 }
 
 const ProductDetail = (props) => {
-    const { title, company } = props.product;
+
+    const [modalOpen, setmodalOpen] = useState(false);
+    const { title, company, inCart } = props.product;
+
+    const toggleModal = () => {
+        setmodalOpen(!modalOpen);
+    }
+
     if (props.product != null) {
         return (
             <React.Fragment>
@@ -94,27 +102,33 @@ const ProductDetail = (props) => {
                                     made by: <span className="text-uppercase">{company}</span>
                                 </h4>
                                 <RenderComment comments={props.comments} />
-                                {/* <div className="py-4">
+                                <div className="py-4">
                                     <ButtonContainer
                                         cart
                                         disabled={inCart ? true : false}
                                         onClick={() => {
                                             // props.addToCart(id);
                                             // props.openModal(id);
+                                            toggleModal();
                                         }}
                                     >
                                         {inCart ? "inCart" : "add to cart"}
                                     </ButtonContainer>
-                                    <ButtonContainer
+                                    {/* <ButtonContainer
                                     // onClick={() => props.openComment()}
                                     >
                                         Add Comment
-                                    </ButtonContainer>
-                                </div> */}
+                                    </ButtonContainer> */}
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <Modal
+                    toggleModal={toggleModal}
+                    modalOpen={modalOpen}
+                    product={props.product}
+                />
             </React.Fragment>
         )
     } else {
