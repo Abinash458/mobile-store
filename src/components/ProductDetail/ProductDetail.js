@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 
-import { ButtonContainer } from '../StyledComponents/Button';
+// import { ButtonContainer } from '../StyledComponents/Button';
 
 const RenderComment = ({ comments }) => {
     if (comments == null) {
@@ -64,7 +64,7 @@ const RenderProduct = (props) => {
 }
 
 const ProductDetail = (props) => {
-    const { title, company, inCart } = props.product;
+    const { title, company } = props.product;
     if (props.product != null) {
         return (
             <React.Fragment>
@@ -94,24 +94,23 @@ const ProductDetail = (props) => {
                                     made by: <span className="text-uppercase">{company}</span>
                                 </h4>
                                 <RenderComment comments={props.comments} />
-                                <div className="py-4">
+                                {/* <div className="py-4">
                                     <ButtonContainer
                                         cart
                                         disabled={inCart ? true : false}
                                         onClick={() => {
-                                            // this.props.addToCart(id);
-                                            // this.props.openModal(id);
-                                            props.openModal();
+                                            // props.addToCart(id);
+                                            // props.openModal(id);
                                         }}
                                     >
                                         {inCart ? "inCart" : "add to cart"}
                                     </ButtonContainer>
                                     <ButtonContainer
-                                    // onClick={() => this.props.openComment()}
+                                    // onClick={() => props.openComment()}
                                     >
                                         Add Comment
                                     </ButtonContainer>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                     </div>

@@ -1,50 +1,81 @@
-import React, { Component } from "react";
+import React from "react";
 import styled from "styled-components";
 import { ButtonContainer } from "../../StyledComponents/Button";
 import { Link } from "react-router-dom";
 
-export default class Modal extends Component {
-    render() {
-        const { img, title, price } = this.props.products;
+
+const RenderModal = (props) => {
+    // const { image, title, price } = props.props.modalProduct;
+    console.log(props)
+    if (props.props.modalProduct != null) {
         return (
-            <div>
-                {!this.props.modalOpen ? null : (
-                    <ModalContainer>
-                        <div className="container">
-                            <div className="row">
-                                <div id="modal" className="col-8 mx-auto col-md-6 col-lg-4 text-center text-capitalize p-5">
-                                    <h5>item added to the cart</h5>
-                                    <img src={img} className="img-fluid" alt="product" />
-                                    <h5> {title} </h5>
-                                    <h5 className="text-muted">price: &#8377;{price}</h5>
-                                    <Link to="/shop">
-                                        <ButtonContainer
-                                            onClick={() => {
-                                                this.props.closeModal();
-                                            }}
-                                        >
-                                            back
-                                        </ButtonContainer>
-                                    </Link>
-                                    <Link to="/cart">
-                                        <ButtonContainer
-                                            cart
-                                            onClick={() => {
-                                                this.props.closeModal();
-                                            }}
-                                        >
-                                            go to cart
-                                        </ButtonContainer>
-                                    </Link>
-                                </div>
-                            </div>
+            <ModalContainer >
+                <div className="container">
+                    <div className="row">
+                        <div id="modal" className="col-8 mx-auto col-md-6 col-lg-4 text-center text-capitalize p-5">
+                            {/* <h5>item added to the cart</h5>
+                            <img src={image} className="img-fluid" alt="product" />
+                            <h5> {title} </h5>
+                            <h5 className="text-muted">price: &#8377;{price}</h5>
+                            <Link to="/shop">
+                                <ButtonContainer
+                                    onClick={() => {
+                                        props.props.closeModal();
+                                    }}
+                                >
+                                    back
+                            </ButtonContainer>
+                            </Link>
+                            <Link to="/cart">
+                                <ButtonContainer
+                                    cart
+                                    onClick={() => {
+                                        props.props.closeModal();
+                                    }}
+                                >
+                                    go to cart
+                            </ButtonContainer>
+                            </Link> */}
                         </div>
-                    </ModalContainer>
-                )}
-            </div>
+                    </div>
+                </div>
+            </ModalContainer>
+        );
+    } else {
+        return (
+            <ModalContainer >
+                <div className="container">
+                    <div className="row">
+                        <div id="modal" className="col-8 mx-auto col-md-6 col-lg-4 text-center text-capitalize p-5">
+                            <h3 className="text-danger"> Error </h3>
+                            <Link to="/shop">
+                                <ButtonContainer
+                                    onClick={() => {
+                                        props.props.closeModal();
+                                    }}
+                                >
+                                    back
+                            </ButtonContainer>
+                            </Link>
+                        </div>
+                    </div>
+                </div>
+            </ModalContainer>
         );
     }
 }
+
+const Modal = (props) => {
+    return (
+        <div>
+            {!props.modalOpen ? null : (
+                <RenderModal props={props} />
+            )}
+        </div>
+    );
+}
+
+export default Modal;
 
 const ModalContainer = styled.div`
   position: fixed;

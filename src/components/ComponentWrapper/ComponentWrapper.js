@@ -9,11 +9,10 @@ import { COMMENTS } from '../../shared/comments';
 import Header from '../Header/Header';
 import Home from '../Home/Home';
 import ProductList from '../ProductList/ProductList';
-// import ProductDetail from "../ProductDetail/ProductDetail";
+import ProductDetail from '../ProductDetail/ProductDetail';
 import ContactPage from "../Contact/ContactPage";
 import Footer from "../Footer/Footer";
-import ProductDetail from '../ProductDetail/ProductDetail';
-import Modal from '../Cart/components/GotoCartModal';
+// import Modal from '../Cart/components/GotoCartModal';
 
 export default class ComponentWrapper extends Component {
 
@@ -23,13 +22,13 @@ export default class ComponentWrapper extends Component {
             products: storeProducts,
             comments: COMMENTS,
             promotions: PROMOTIONS,
-            modalOpen: false,
-            selectedProduct: null,
+            // modalOpen: false,
+            // selectedProduct: null
         }
     }
 
-    // getItem = (productId) => {
-    //     const product = this.state.products.find((item) => item.id === productId);
+    // getItem = (id) => {
+    //     const product = this.state.products.filter((item) => item.id === id);
     //     return product;
     // };
 
@@ -38,18 +37,17 @@ export default class ComponentWrapper extends Component {
     //     this.setState({ selectedProduct: product });
     // }
 
-    openModal = (id) => {
-        // const products = this.getItem(id);
-        this.setState(() => {
-            return { modalOpen: true };
-        });
-    };
+    // openModal = (id) => {
+    //     this.setState(() => {
+    //         return { modalOpen: true, };
+    //     });
+    // };
 
-    closeModal = () => {
-        this.setState(() => {
-            return { modalOpen: false };
-        });
-    };
+    // closeModal = () => {
+    //     this.setState(() => {
+    //         return { modalOpen: false };
+    //     });
+    // };
 
     render() {
 
@@ -61,7 +59,7 @@ export default class ComponentWrapper extends Component {
             );
         }
 
-        const DishWithId = ({ match }) => {
+        const ProductWithId = ({ match }) => {
             return (
                 <ProductDetail
                     product={this.state.products.filter((product) => product.id === parseInt(match.params.productId, 10))[0]}
@@ -77,17 +75,17 @@ export default class ComponentWrapper extends Component {
                 <Switch>
                     <Route path="/home" component={HomePage} />
                     <Route exact path="/shop" component={() => <ProductList products={this.state.products} />} />
-                    <Route path='/shop/:productId' component={DishWithId} />
+                    <Route path='/shop/:productId' component={ProductWithId} />
                     <Route exact path='/contactus' component={ContactPage} />
                     <Redirect to="/home" />
                 </Switch>
                 <Footer />
-                <Modal
+                {/* <Modal
                     openModal={this.openModal}
                     closeModal={this.closeModal}
                     modalOpen={this.state.modalOpen}
-                    products={this.state.products}
-                />
+                    modalProduct={this.state.selectedProduct}
+                /> */}
             </div>
         )
     }
