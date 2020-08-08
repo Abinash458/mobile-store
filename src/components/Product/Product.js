@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 const Product = (props) => {
-  const { id, title, image, price, inCart } = props.product;
+  const { id, title, image, price } = props.product;
   return (
     <ProductWrapper key={id} className="col-9 mx-auto col-md-6 col-lg-3 my-3">
       <Link to={`/shop/${id}`}>
@@ -21,7 +21,7 @@ const Product = (props) => {
               <span className="mr-1">&#8377;</span>
               {price}
             </h5>
-            <button disabled={inCart ? true : false}
+            {/* <button disabled={inCart ? true : false}
               // onClick={() => {
               //     this.props.addToCart(id);
               //     this.props.openModal(id);
@@ -32,7 +32,7 @@ const Product = (props) => {
                 </p>
               ) : (
                   <i className="fas fa-cart-plus" />
-                )}</button>
+                )}</button> */}
           </div>
         </div>
       </Link>

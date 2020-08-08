@@ -58,7 +58,7 @@ export const storeProducts = [
     {
         id: 4,
         title: "HTC Desire 626s",
-        image: "/assets//product-5.png",
+        image: "/assets/img/product-5.png",
         price: 4900,
         company: "htc",
         info:

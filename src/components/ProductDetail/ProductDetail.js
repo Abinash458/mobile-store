@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 
+import { ButtonContainer } from '../StyledComponents/Button';
 
 const RenderComment = ({ comments }) => {
     if (comments == null) {
@@ -63,6 +64,7 @@ const RenderProduct = (props) => {
 }
 
 const ProductDetail = (props) => {
+    const { title, company, inCart } = props.product;
     if (props.product != null) {
         return (
             <React.Fragment>
@@ -74,11 +76,11 @@ const ProductDetail = (props) => {
                                     <Link to="/shop">Shop</Link>
                                 </BreadcrumbItem>
                                 <BreadcrumbItem active>
-                                    {props.product.title}
+                                    {title}
                                 </BreadcrumbItem>
                             </Breadcrumb>
                             <div className="col-12 text-white">
-                                <h3>{props.product.title}</h3>
+                                <h3>{title}</h3>
                                 <hr />
                             </div>
                         </div>
@@ -87,11 +89,29 @@ const ProductDetail = (props) => {
                                 <RenderProduct product={props.product} />
                             </div>
                             <div className="col-md-6 py-4">
-                                <h2 className="text-white text-capitalize">model: {props.product.title}</h2>
+                                <h2 className="text-white text-capitalize">model: {title}</h2>
                                 <h4 className="text-white text-uppercase mt-3 mb-2">
-                                    made by: <span className="text-uppercase">{props.product.company}</span>
+                                    made by: <span className="text-uppercase">{company}</span>
                                 </h4>
                                 <RenderComment comments={props.comments} />
+                                <div className="py-4">
+                                    <ButtonContainer
+                                        cart
+                                        disabled={inCart ? true : false}
+                                        onClick={() => {
+                                            // this.props.addToCart(id);
+                                            // this.props.openModal(id);
+                                            props.openModal();
+                                        }}
+                                    >
+                                        {inCart ? "inCart" : "add to cart"}
+                                    </ButtonContainer>
+                                    <ButtonContainer
+                                    // onClick={() => this.props.openComment()}
+                                    >
+                                        Add Comment
+                                    </ButtonContainer>
+                                </div>
                             </div>
                         </div>
                     </div>

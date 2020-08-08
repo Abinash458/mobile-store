@@ -13,6 +13,7 @@ import ProductList from '../ProductList/ProductList';
 import ContactPage from "../Contact/ContactPage";
 import Footer from "../Footer/Footer";
 import ProductDetail from '../ProductDetail/ProductDetail';
+import Modal from '../Cart/components/GotoCartModal';
 
 export default class ComponentWrapper extends Component {
 
@@ -22,7 +23,8 @@ export default class ComponentWrapper extends Component {
             products: storeProducts,
             comments: COMMENTS,
             promotions: PROMOTIONS,
-            // selectedProduct: null,
+            modalOpen: false,
+            selectedProduct: null,
         }
     }
 
@@ -35,6 +37,19 @@ export default class ComponentWrapper extends Component {
     //     const product = this.getItem(productId);
     //     this.setState({ selectedProduct: product });
     // }
+
+    openModal = (id) => {
+        // const products = this.getItem(id);
+        this.setState(() => {
+            return { modalOpen: true };
+        });
+    };
+
+    closeModal = () => {
+        this.setState(() => {
+            return { modalOpen: false };
+        });
+    };
 
     render() {
 
@@ -50,7 +65,8 @@ export default class ComponentWrapper extends Component {
             return (
                 <ProductDetail
                     product={this.state.products.filter((product) => product.id === parseInt(match.params.productId, 10))[0]}
-                    comments={this.state.comments.filter((comment) => comment.productId === parseInt(match.params.productId, 10))}
+                    comments={this.state.comments.filter((comment) => comment.productId === parseInt(match.params.productId, 10))
+                    } openModal={this.openModal}
                 />
             );
         }
@@ -66,6 +82,12 @@ export default class ComponentWrapper extends Component {
                     <Redirect to="/home" />
                 </Switch>
                 <Footer />
+                <Modal
+                    openModal={this.openModal}
+                    closeModal={this.closeModal}
+                    modalOpen={this.state.modalOpen}
+                    products={this.state.products}
+                />
             </div>
         )
     }
