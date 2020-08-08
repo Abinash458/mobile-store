@@ -33,23 +33,24 @@ const RenderComment = ({ comments }) => {
     )
 }
 
-const RenderProduct = ({ product }) => {
-    if (product != null) {
+const RenderProduct = (props) => {
+    const { title, image, price, info } = props.product;
+    if (props.product != null) {
         return (
             <ProductDetailWrapper>
                 <div className="card">
                     <div className="img-container p-5">
-                        <img src={product.image} alt="productImage" className="card-img-top" />
+                        <img alt={title} src={image} className="card-img-top" />
                     </div>
                     <div className="card-footer">
                         <div className="d-flex justify-content-between">
-                            <h3 className="align-self-center">{product.title}</h3>
-                            <h3 className="font-italic">
+                            <h3 className="align-self-center">{title}</h3>
+                            <h3>
                                 <span className="mr-1">&#8377;</span>
-                                {product.price}
+                                {price}
                             </h3>
                         </div>
-                        <p className="my-2 text-center">{product.info}</p>
+                        <p className="my-2 text-center">{info}</p>
                     </div>
                 </div>
             </ProductDetailWrapper>
@@ -91,7 +92,6 @@ const ProductDetail = (props) => {
                                     made by: <span className="text-uppercase">{props.product.company}</span>
                                 </h4>
                                 <RenderComment comments={props.comments} />
-                                {/* {console.log(props.comments)} */}
                             </div>
                         </div>
                     </div>

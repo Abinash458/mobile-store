@@ -13,7 +13,7 @@ function RenderCard({ item }) {
                     <div className="d-flex justify-content-between">
                         <h3 className="align-self-center">{item.title}</h3>
                         {
-                            item.label === "New" ? <h5 className="align-self-center text-danger">New</h5> : null
+                            item.label === "New" ? <h5 className="align-self-center text-danger"><span className="fa fa-star"></span> New</h5> : null
                         }
                     </div>
                     <p className="my-2">{item.info}</p>
