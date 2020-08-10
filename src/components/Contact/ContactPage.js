@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { Breadcrumb, BreadcrumbItem, Form, FormGroup, Label, Input, Col, FormFeedback, Button } from 'reactstrap';
+import { Breadcrumb, BreadcrumbItem, Form, FormGroup, Label, Input, FormFeedback } from 'reactstrap';
 import { Link } from "react-router-dom";
+import styled from "styled-components";
+
 
 class ContactPage extends Component {
     constructor(props) {
@@ -79,129 +81,234 @@ class ContactPage extends Component {
     render() {
         const errors = this.validate(this.state.firstName, this.state.lastName, this.state.telNum, this.state.email);
         return (
-            <div className="container text-white py-4">
-                <div className="row">
-                    <Breadcrumb>
-                        <BreadcrumbItem>
-                            <Link to="/home">Home</Link>
-                        </BreadcrumbItem>
-                        <BreadcrumbItem active>
-                            Contact Us
-                        </BreadcrumbItem>
-                    </Breadcrumb>
-                    <div className="col-12 text-white">
-                        <h3>Contact Us</h3>
-                        <hr />
+            <ContactPageWrapper>
+                <div className="container py-5">
+                    <div className="row">
+                        <Breadcrumb>
+                            <BreadcrumbItem>
+                                <Link to="/home">Home</Link>
+                            </BreadcrumbItem>
+                            <BreadcrumbItem active>
+                                Contact Us
+                         </BreadcrumbItem>
+                        </Breadcrumb>
                     </div>
-                </div>
-                <div className="row row-content">
-                    <div className="col-12">
-                        <h3>Location Information</h3>
-                    </div>
-                    <div className="col-12 col-sm-4 offset-sm-1">
-                        <h5>Our Address</h5>
-                        <address>
-                            126, Some Road, Some Street<br />
-                            Near Somewhere, Some Place<br />
-                            Some Country<br />
-                            <i className="fa fa-phone"></i>: +000 1234 5678<br />
-                            <i className="fa fa-envelope"></i>: <a href="mailto:something@gmail.com">mailto:something@gmail.com</a>
-                        </address>
-                    </div>
-                    <div className="col-12 col-sm-6 offset-sm-1">
-                        <h5>Map of our Location</h5>
-                    </div>
-                </div>
-                <div className="row row-content">
-                    <div className="col-12">
-                        <h3>Send us Your Feedback</h3>
-                    </div>
-                    <div className="col-12 col-md-9">
-                        <Form onSubmit={this.handleSubmit}>
-                            <FormGroup row>
-                                <Label htmlFor="firstName" md={2}>
-                                    First Name
-                                </Label>
-                                <Col md={10}>
-                                    <Input type="text" id="firstName" name="firstName" placeholder="First Name" value={this.state.firstName} valid={errors.firstName === ''} invalid={errors.firstName !== ''} onChange={this.handleChange} onBlur={this.handleBlur('firstName')} />
-                                    <FormFeedback>
-                                        {errors.firstName}
-                                    </FormFeedback>
-                                </Col>
-                            </FormGroup>
-                            <FormGroup row>
-                                <Label htmlFor="lastName" md={2}>
-                                    Last Name
-                                </Label>
-                                <Col md={10}>
-                                    <Input type="text" id="lastName" name="lastName" placeholder="Last Name" value={this.state.lastName} valid={errors.lastName === ''} invalid={errors.lastName !== ''} onChange={this.handleChange} onBlur={this.handleBlur('lastName')} />
-                                    <FormFeedback>
-                                        {errors.lastName}
-                                    </FormFeedback>
-                                </Col>
-                            </FormGroup>
-                            <FormGroup row>
-                                <Label htmlFor="telNum" md={2}>
-                                    Contact Tel.
-                                </Label>
-                                <Col md={10}>
-                                    <Input type="tel" id="telNum" name="telNum" placeholder="Tel. Number" value={this.state.telNum} valid={errors.telNum === ''} invalid={errors.telNum !== ''} onChange={this.handleChange} onBlur={this.handleBlur('telNum')} />
-                                    <FormFeedback>
-                                        {errors.telNum}
-                                    </FormFeedback>
-                                </Col>
-                            </FormGroup>
-                            <FormGroup row>
-                                <Label htmlFor="email" md={2}>
-                                    Email
-                                </Label>
-                                <Col md={10}>
-                                    <Input type="email" id="email" name="email" placeholder="Email" value={this.state.email} valid={errors.email === ''} invalid={errors.email !== ''} onChange={this.handleChange} onBlur={this.handleBlur('email')} />
-                                    <FormFeedback>
-                                        {errors.email}
-                                    </FormFeedback>
-                                </Col>
-                            </FormGroup>
-                            <FormGroup row>
-                                <Col md={{ size: 6, offset: 2 }}>
+                    <h1>Connect with us</h1>
+                    <p>We would love to respond to your queries. Feel free to get in touch with us.</p>
+                    <div className="contact-box">
+                        <div className="contact-left">
+                            <h3>Sent Your Request</h3>
+                            <Form onSubmit={this.handleSubmit}>
+                                <div className="input-row">
+                                    <FormGroup className="input-group">
+                                        <Label>
+                                            First name
+                                        </Label>
+                                        <Input className="input" type="text" id="firstName" name="firstName" placeholder="First Name" value={this.state.firstName} valid={errors.firstName === ''} invalid={errors.firstName !== ''} onChange={this.handleChange} onBlur={this.handleBlur('firstName')} />
+                                        <FormFeedback>
+                                            {errors.firstName}
+                                        </FormFeedback>
+                                        {console.log(errors.firstName)}
+                                    </FormGroup>
+                                    <FormGroup className="input-group">
+                                        <Label>
+                                            Last name
+                                        </Label>
+                                        <Input className="input" type="text" id="lastName" name="lastName" placeholder="Last Name" value={this.state.lastName} valid={errors.lastName === ''} invalid={errors.lastName !== ''} onChange={this.handleChange} onBlur={this.handleBlur('lastName')} />
+                                        <FormFeedback>
+                                            {errors.lastName}
+                                        </FormFeedback>
+                                    </FormGroup>
+                                </div>
+                                <div className="input-row">
+                                    <FormGroup className="input-group">
+                                        <Label>
+                                            Tel. Number
+                                        </Label>
+                                        <Input className="input" type="tel" id="telNum" name="telNum" placeholder="Tel. Number" value={this.state.telNum} valid={errors.telNum === ''} invalid={errors.telNum !== ''} onChange={this.handleChange} onBlur={this.handleBlur('telNum')} />
+                                        <FormFeedback>
+                                            {errors.telNum}
+                                        </FormFeedback>
+                                    </FormGroup>
+                                    <FormGroup className="input-group">
+                                        <Label>
+                                            Email
+                                        </Label>
+                                        <Input className="input" type="email" id="email" name="email" placeholder="Email" value={this.state.email} valid={errors.email === ''} invalid={errors.email !== ''} onChange={this.handleChange} onBlur={this.handleBlur('email')} />
+                                        <FormFeedback>
+                                            {errors.email}
+                                        </FormFeedback>
+                                    </FormGroup>
+                                </div>
+                                <div className="input-row">
                                     <FormGroup check>
                                         <Label check>
-                                            <Input type="checkbox" name="agree" checked={this.state.agree} onChange={this.handleChange} /> {' '} <strong>May we contact you?</strong>
+                                            <Input type="checkbox" name="agree" checked={this.state.agree} onChange={this.handleChange} /> {' '} <Label>May we contact you?</Label>
                                         </Label>
                                     </FormGroup>
-                                </Col>
-                                <Col md={{ size: 3, offset: 1 }}>
-                                    <Input type="select" name="contactType" value={this.state.contactType} onChange={this.handleChange} >
-                                        <option>
-                                            Tel.
-                                        </option>
-                                        <option>
-                                            Email
-                                        </option>
-                                    </Input>
-                                </Col>
-                            </FormGroup>
-                            <FormGroup row>
-                                <Label htmlFor="message" md={2}>
-                                    Your Feedback
-                                </Label>
-                                <Col md={10}>
-                                    <Input type="textarea" id="message" name="message" rows="12" value={this.state.message} onChange={this.handleChange} />
-                                </Col>
-                            </FormGroup>
-                            <FormGroup row>
-                                <Col md={{ size: 10, offset: 2 }}>
-                                    <Button type="submit" color="primary">
-                                        Send Feedback
-                                    </Button>
-                                </Col>
-                            </FormGroup>
-                        </Form>
+                                    <FormGroup className="input-group">
+                                        <Input type="select" className="select" name="contactType" value={this.state.contactType} onChange={this.handleChange} >
+                                            <option>
+                                                Tel.
+                                         </option>
+                                            <option>
+                                                Email
+                                         </option>
+                                        </Input>
+                                    </FormGroup>
+                                </div>
+                                <FormGroup className="input-group">
+                                    <Label htmlFor="message">
+                                        Your Feedback
+                                 </Label>
+                                    <Input className="textarea" type="textarea" id="message" name="message" rows="3" value={this.state.message} onChange={this.handleChange} />
+                                </FormGroup>
+                                <button type="submit">
+                                    Send Feedback
+                                </button>
+                            </Form>
+                        </div>
+                        <div className="contact-right">
+                            <h3>Reach Us</h3>
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <i className="fa fa-envelope"></i>
+                                        </td>
+                                        <td>
+                                            mailto:something@gmail.com
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i className="fa fa-phone"></i>
+                                        </td>
+                                        <td>
+                                            +000 1234 5678
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i className="fa fa-address-card" aria-hidden="true"></i>
+                                        </td>
+                                        <td>
+                                            126, Some Road, Some Street<br />
+                                            Near Somewhere, Some Place<br />
+                                            Some Country
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </ContactPageWrapper>
         )
     }
 }
 
 export default ContactPage;
+
+
+const ContactPageWrapper = styled.div`
+    color: var(--mainWhite);
+    font-family: 'Poppins', sans-serif;
+    .contact-box {
+        background-color: var(--headerFooterBackground);
+        display: flex;
+    }
+    .contact-left {
+        flex-basis: 60%;
+        padding: 40px 60px;
+    }
+    .contact-right {
+        flex-basis: 40%;
+        padding: 40px;
+        background-color: var(--secondaryBackground);
+    }
+    h1 {
+        margin-bottom: 10px;
+        font-weight: bold;
+    }
+    .container p {
+        margin-bottom: 40px;
+    }
+    .input-row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
+    .input-group {
+        flex-basis: 45%;
+    }
+    .input {
+        width: 100%;
+        border: none;
+        border-bottom: 1px solid #ccc;
+        outline: none;
+        padding: 0;
+        padding-bottom: 5px;
+        background-color: transparent;
+        color: var(--mainWhite);
+    }
+    .checkbox-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
+    .checkbox-row .checkbox-text {
+        flex-basis: 90%;
+    }
+    .checkbox-row .checkbox-input {
+        flex-basis: 10%;
+    }
+    .select {
+        border: none;
+        border-bottom: 1px solid #ccc;
+        outline: none;
+        padding-bottom: 5px;
+        background-color: transparent;
+        color: var(--mainWhite);
+    }
+    .form-check {
+        position: relative;
+        display: flex;
+        align-items: center
+    }
+    .textarea {
+        width: 100%;
+        border: none;
+        border-bottom: 1px solid #ccc;
+        outline: none;
+        padding-bottom: 5px;
+        background-color: transparent;
+        box-sizing: border-box;
+        resize: none;
+        color: var(--mainWhite);
+    }
+    Label {
+        margin-bottom: 6px;
+        display: block;
+    }
+    button {
+        background-color: var(--secondaryBackground);
+        border: none;
+        outline: none;
+        color: var(--mainWhite);
+        padding: 10px;
+        /* border-radius: 30px; */
+        margin-top: 20px;
+    }
+    .contact-left h3, .contact-right h3 {
+        font-weight: 600;
+        margin-bottom: 30px;
+    }
+    tr td:first-child {
+        padding-right: 20px;
+    }
+    tr td {
+        padding-top: 20px;
+    }
+`
