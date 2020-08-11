@@ -5,6 +5,7 @@ import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 
 import { ButtonContainer } from '../StyledComponents/Button';
 import Modal from "../Cart/components/GotoCartModal";
+import CommentModel from "./components/CommentModel";
 
 const RenderComment = ({ comments }) => {
     if (comments == null) {
@@ -67,10 +68,20 @@ const RenderProduct = (props) => {
 const ProductDetail = (props) => {
 
     const [modalOpen, setmodalOpen] = useState(false);
+    const [commentModalOpen, setcommentModalOpen] = useState(false);
     const { title, company, inCart } = props.product;
 
     const toggleModal = () => {
         setmodalOpen(!modalOpen);
+    }
+
+    const toggleCommentModal = () => {
+        setcommentModalOpen(!commentModalOpen)
+    }
+
+    const handleCommentSubmit = (value) => {
+        alert("Current State is: " + JSON.stringify(value));
+        toggleCommentModal();
     }
 
     if (props.product != null) {
@@ -114,11 +125,11 @@ const ProductDetail = (props) => {
                                     >
                                         {inCart ? "inCart" : "add to cart"}
                                     </ButtonContainer>
-                                    {/* <ButtonContainer
-                                    // onClick={() => props.openComment()}
+                                    <ButtonContainer
+                                        onClick={() => toggleCommentModal()}
                                     >
                                         Add Comment
-                                    </ButtonContainer> */}
+                                    </ButtonContainer>
                                 </div>
                             </div>
                         </div>
@@ -128,6 +139,11 @@ const ProductDetail = (props) => {
                     toggleModal={toggleModal}
                     modalOpen={modalOpen}
                     product={props.product}
+                />
+                <CommentModel
+                    toggleModal={toggleCommentModal}
+                    modalOpen={commentModalOpen}
+                    handleCommentSubmit={handleCommentSubmit}
                 />
             </React.Fragment>
         )
