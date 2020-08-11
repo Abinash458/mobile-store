@@ -5,6 +5,12 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import cx from 'classnames';
 
+const required = (val) => val && val.length;
+const maxLength = (len) => (val) => !(val) || (val.length <= len);
+const minLength = (len) => (val) => val && (val.length >= len);
+const isNumber = (val) => !isNaN(Number(val));
+const validEmail = (val) => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val);
+
 class ContactPage extends Component {
     constructor(props) {
         super(props);
@@ -25,61 +31,12 @@ class ContactPage extends Component {
         }
     }
 
-    // handleChange = (e) => {
-    //     const target = e.target;
-    //     const value = target.type === "checkbox" ? target.checked : target.value;
-    //     const name = target.name;
-
-    //     this.setState({
-    //         [name]: value
-    //     });
-    // }
-
     handleSubmit = (values) => {
         console.log("Current State is: " + JSON.stringify(values));
         alert("Current State is: " + JSON.stringify(values))
     }
 
-    // handleBlur = (field) => (e) => {
-    //     this.setState({
-    //         touched: { ...this.state.touched, [field]: true }
-    //     });
-    // }
-
-    // validate = (firstName, lastName, telNum, email) => {
-    //     const errors = {
-    //         firstName: '',
-    //         lastName: '',
-    //         telNum: '',
-    //         email: '',
-    //     }
-
-    //     // first name validation
-    //     if (this.state.touched.firstName && firstName.length < 3)
-    //         errors.firstName = "First name should be greater than 3 character"
-    //     else if (this.state.touched.firstName && firstName.length > 10)
-    //         errors.firstName = "First name should be less than 10 character"
-
-    //     // last name validation
-    //     if (this.state.touched.lastName && lastName.length < 3)
-    //         errors.lastName = "Last name should be greater than 3 character"
-    //     else if (this.state.touched.lastName && lastName.length > 10)
-    //         errors.lastName = "Last name should be less than 10 character"
-
-    //     // tel num validation
-    //     const reg = /^\d+$/;
-    //     if (this.state.touched.telNum && !reg.test(telNum))
-    //         errors.telNum = "Tel. Number should contain only number";
-
-    //     // email validation
-    //     if (this.state.touched.email && email.split('').filter(x => x === "@").length !== 1)
-    //         errors.email = "InValid email";
-
-    //     return errors;
-    // }
-
     render() {
-        // const errors = this.validate(this.state.firstName, this.state.lastName, this.state.telNum, this.state.email);
         return (
             <ContactPageWrapper>
                 <div className="container py-5">
@@ -98,7 +55,7 @@ class ContactPage extends Component {
                     <div className="contact-box">
                         <div className="contact-left">
                             <h3>Sent Your Request</h3>
-                            <LocalForm onSubmit={(valus) => this.handleSubmit(valus)}>
+                            <LocalForm onSubmit={(values) => this.handleSubmit(values)}>
                                 <div className="input-row">
                                     <div className="input-group">
                                         <Label>
@@ -110,8 +67,20 @@ class ContactPage extends Component {
                                             id="firstName"
                                             name="firstName"
                                             placeholder="First Name"
+                                            validators={{
+                                                required, minLength: minLength(3), maxLength: maxLength(15)
+                                            }}
                                         />
-
+                                        <Errors
+                                            className="text-danger"
+                                            model=".firstName"
+                                            show="touched"
+                                            messages={{
+                                                required: 'Required',
+                                                minLength: 'Must be greater than 2 characters',
+                                                maxLength: 'Must be 15 characters or less'
+                                            }}
+                                        />
                                     </div>
                                     <div className="input-group">
                                         <Label>
@@ -123,8 +92,20 @@ class ContactPage extends Component {
                                             id="lastName"
                                             name="lastName"
                                             placeholder="Last Name"
+                                            validators={{
+                                                required, minLength: minLength(3), maxLength: maxLength(15)
+                                            }}
                                         />
-
+                                        <Errors
+                                            className="text-danger"
+                                            model=".lastName"
+                                            show="touched"
+                                            messages={{
+                                                required: 'Required',
+                                                minLength: 'Must be greater than 2 characters',
+                                                maxLength: 'Must be 15 characters or less'
+                                            }}
+                                        />
                                     </div>
                                 </div>
                                 <div className="input-row">
@@ -138,6 +119,23 @@ class ContactPage extends Component {
                                             id="telNum"
                                             name="telNum"
                                             placeholder="Tel. Number"
+                                            validators={{
+                                                required,
+                                                minLength: minLength(5),
+                                                maxLength: maxLength(10),
+                                                isNumber
+                                            }}
+                                        />
+                                        <Errors
+                                            className="text-danger"
+                                            model=".telNum"
+                                            show="touched"
+                                            messages={{
+                                                required: 'Required',
+                                                minLength: 'Must be greater than 5 numbers',
+                                                maxLength: 'Must be 10 numbers and less',
+                                                isNumber: 'Must be a number'
+                                            }}
                                         />
 
                                     </div>
@@ -151,8 +149,19 @@ class ContactPage extends Component {
                                             id="email"
                                             name="email"
                                             placeholder="Email"
+                                            validators={{
+                                                required, validEmail
+                                            }}
                                         />
-
+                                        <Errors
+                                            className="text-danger"
+                                            model=".email"
+                                            show="touched"
+                                            messages={{
+                                                required: 'Required',
+                                                validEmail: 'Invalid Email Address'
+                                            }}
+                                        />
                                     </div>
                                 </div>
                                 <div className="input-row">
