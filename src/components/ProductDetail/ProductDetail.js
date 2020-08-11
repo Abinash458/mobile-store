@@ -6,8 +6,16 @@ import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import { ButtonContainer } from '../StyledComponents/Button';
 import Modal from "../Cart/components/GotoCartModal";
 import CommentModel from "./components/CommentModel";
+import ReadOnlyStarRating from './components/ReadOnlyStarRating';
 
-const RenderComment = ({ comments }) => {
+const RenderComment = ({ comments, addComment, productId }) => {
+
+    const [commentModalOpen, setcommentModalOpen] = useState(false);
+
+    const toggleCommentModal = () => {
+        setcommentModalOpen(!commentModalOpen)
+    }
+
     if (comments == null) {
         return (<div></div>)
     }
@@ -15,6 +23,7 @@ const RenderComment = ({ comments }) => {
         return (
             <li key={comment.id}>
                 <h6 className="text-primary">{comment.comment}</h6>
+                <ReadOnlyStarRating comments={comment.rating} />
                 <p className="text-muted">-- {comment.author},
                         &nbsp;
                         {new Intl.DateTimeFormat('en-US', {
@@ -23,6 +32,12 @@ const RenderComment = ({ comments }) => {
                     day: '2-digit'
                 }).format(new Date(comment.date))}
                 </p>
+                <CommentModel
+                    toggleModal={toggleCommentModal}
+                    modalOpen={commentModalOpen}
+                    addComment={addComment}
+                    productId={productId}
+                />
             </li>
         )
     })
@@ -31,6 +46,13 @@ const RenderComment = ({ comments }) => {
             <h5 className='py-4 text-white'>Comments:</h5>
             <ul className='list-unstyled'>
                 {cmnts}
+                <div className="py-1">
+                    <ButtonContainer
+                        onClick={() => toggleCommentModal()}
+                    >
+                        Add Comment
+                </ButtonContainer>
+                </div>
             </ul>
         </div>
     )
@@ -68,20 +90,10 @@ const RenderProduct = (props) => {
 const ProductDetail = (props) => {
 
     const [modalOpen, setmodalOpen] = useState(false);
-    const [commentModalOpen, setcommentModalOpen] = useState(false);
     const { title, company, inCart } = props.product;
 
     const toggleModal = () => {
         setmodalOpen(!modalOpen);
-    }
-
-    const toggleCommentModal = () => {
-        setcommentModalOpen(!commentModalOpen)
-    }
-
-    const handleCommentSubmit = (value) => {
-        alert("Current State is: " + JSON.stringify(value));
-        toggleCommentModal();
     }
 
     if (props.product != null) {
@@ -112,8 +124,12 @@ const ProductDetail = (props) => {
                                 <h4 className="text-white text-uppercase mt-3 mb-2">
                                     made by: <span className="text-uppercase">{company}</span>
                                 </h4>
-                                <RenderComment comments={props.comments} />
-                                <div className="py-4">
+                                <RenderComment
+                                    comments={props.comments}
+                                    addComment={props.addComment}
+                                    productId={props.product.id}
+                                />
+                                <div>
                                     <ButtonContainer
                                         cart
                                         disabled={inCart ? true : false}
@@ -125,11 +141,7 @@ const ProductDetail = (props) => {
                                     >
                                         {inCart ? "inCart" : "add to cart"}
                                     </ButtonContainer>
-                                    <ButtonContainer
-                                        onClick={() => toggleCommentModal()}
-                                    >
-                                        Add Comment
-                                    </ButtonContainer>
+
                                 </div>
                             </div>
                         </div>
@@ -139,11 +151,6 @@ const ProductDetail = (props) => {
                     toggleModal={toggleModal}
                     modalOpen={modalOpen}
                     product={props.product}
-                />
-                <CommentModel
-                    toggleModal={toggleCommentModal}
-                    modalOpen={commentModalOpen}
-                    handleCommentSubmit={handleCommentSubmit}
                 />
             </React.Fragment>
         )

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
+import { addComment } from '../../redux/Actions/ActionCreators';
 
 import Header from '../Header/Header';
 import Home from '../Home/Home';
@@ -19,6 +20,9 @@ const mapStateToProps = state => {
     }
 }
 
+const mapDispatchToProps = (dispatch) => ({
+    addComment: (productId, rating, author, comment) => dispatch(addComment(productId, rating, author, comment))
+});
 
 class ComponentWrapper extends Component {
 
@@ -38,6 +42,7 @@ class ComponentWrapper extends Component {
                     product={this.props.products.filter((product) => product.id === parseInt(match.params.productId, 10))[0]}
                     comments={this.props.comments.filter((comment) => comment.productId === parseInt(match.params.productId, 10))
                     } openModal={this.openModal}
+                    addComment={this.props.addComment}
                 />
             );
         }
@@ -58,4 +63,4 @@ class ComponentWrapper extends Component {
     }
 }
 
-export default withRouter(connect(mapStateToProps)(ComponentWrapper));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ComponentWrapper));

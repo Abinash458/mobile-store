@@ -14,7 +14,7 @@ const RenderCommentModel = (props) => {
             <div className="row">
                 <div id="modal" className="col-8 mx-auto col-md-6 col-lg-4 text-center text-capitalize p-5">
                     <h5>Submit Comment</h5>
-                    <LocalForm onSubmit={(value) => props.props.handleCommentSubmit(value)}>
+                    <LocalForm onSubmit={(value) => props.handleCommentSubmit(value)}>
                         <div className="input-group">
                             <label>Rating</label>
                             <Control.select
@@ -32,9 +32,9 @@ const RenderCommentModel = (props) => {
                         <div className="input-group">
                             <Control.text
                                 className={cx("input", "form-control")}
-                                model=".name"
-                                id="name"
-                                name="name"
+                                model=".author"
+                                id="author"
+                                name="author"
                                 placeholder="Name"
                                 validators={{
                                     required, minLength: minLength(3), maxLength: maxLength(15)
@@ -42,7 +42,7 @@ const RenderCommentModel = (props) => {
                             />
                             <Errors
                                 className="text-danger"
-                                model=".name"
+                                model=".author"
                                 show="touched"
                                 messages={{
                                     required: 'Required',
@@ -83,10 +83,16 @@ const RenderCommentModel = (props) => {
 }
 
 const CommentModel = (props) => {
+
+    const handleCommentSubmit = (value) => {
+        props.addComment(props.productId, value.rating, value.author, value.comment);
+        props.toggleModal();
+    }
+
     return (
         <div>
             {!props.modalOpen ? null : (
-                <RenderCommentModel props={props} />
+                <RenderCommentModel props={props} handleCommentSubmit={handleCommentSubmit} />
             )}
         </div>
     );
