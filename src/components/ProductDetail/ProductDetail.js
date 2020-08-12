@@ -50,9 +50,9 @@ const RenderComment = ({ comments, addComment, productId, toggleCommentModal, co
     )
 }
 
-const RenderProduct = (props) => {
-    const { title, image, price, info } = props.product;
-    if (props.product != null) {
+const RenderProduct = ({ product }) => {
+    const { title, image, price, info } = product;
+    if (product != null) {
         return (
             <ProductDetailWrapper>
                 <div className="card">
@@ -83,8 +83,6 @@ const ProductDetail = (props) => {
 
     const [modalOpen, setmodalOpen] = useState(false);
     const [commentModalOpen, setcommentModalOpen] = useState(false);
-
-    const { title, company, inCart } = props.product;
 
     const toggleCommentModal = () => {
         setcommentModalOpen(!commentModalOpen)
@@ -122,11 +120,11 @@ const ProductDetail = (props) => {
                                     <Link to="/shop">Shop</Link>
                                 </BreadcrumbItem>
                                 <BreadcrumbItem active>
-                                    {title}
+                                    {props.product.title}
                                 </BreadcrumbItem>
                             </Breadcrumb>
                             <div className="col-12 text-white">
-                                <h3>{title}</h3>
+                                <h3>{props.product.title}</h3>
                                 <hr />
                             </div>
                         </div>
@@ -139,11 +137,11 @@ const ProductDetail = (props) => {
                                     <tbody>
                                         <tr style={{ display: 'flex', justifyContent: 'space-between' }}>
                                             <td style={{ flexBasis: "40%" }} className="text-white text-capitalize"><h4>model</h4></td>
-                                            <td style={{ flexBasis: "60%" }} className="text-white text-capitalize"><h4>{title}</h4></td>
+                                            <td style={{ flexBasis: "60%" }} className="text-white text-capitalize"><h4>{props.product.title}</h4></td>
                                         </tr>
                                         <tr style={{ display: 'flex', justifyContent: 'space-between' }}>
                                             <td style={{ flexBasis: "40%" }} className="text-white text-capitalize"><h5>made by</h5></td>
-                                            <td style={{ flexBasis: "60%" }} className="text-white text-capitalize"><h5>{company}</h5></td>
+                                            <td style={{ flexBasis: "60%" }} className="text-white text-capitalize"><h5>{props.product.company}</h5></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -157,13 +155,13 @@ const ProductDetail = (props) => {
                                 <div className="py-2">
                                     <ButtonContainer
                                         cart
-                                        disabled={inCart ? true : false}
+                                        disabled={props.product.inCart ? true : false}
                                         onClick={() => {
                                             // props.addToCart(id);
                                             toggleModal();
                                         }}
                                     >
-                                        {inCart ? "inCart" : "add to cart"}
+                                        {props.product.widthinCart ? "inCart" : "add to cart"}
                                     </ButtonContainer>
                                     <ButtonContainer
                                         onClick={() => toggleCommentModal()}

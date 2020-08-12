@@ -30,7 +30,6 @@ class ComponentWrapper extends Component {
 
     componentDidMount() {
         this.props.fetchProduct()
-        // console.log(product)
     }
 
     render() {

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 const Product = (props) => {
-  console.log(props)
+  // console.log(props)
   const { id, title, image, price } = props.product;
   return (
     <ProductWrapper key={id} className="col-9 mx-auto col-md-6 col-lg-3 my-3">
