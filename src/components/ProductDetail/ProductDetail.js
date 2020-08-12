@@ -7,14 +7,9 @@ import { ButtonContainer } from '../StyledComponents/Button';
 import Modal from "../Cart/components/GotoCartModal";
 import CommentModel from "./components/CommentModel";
 import ReadOnlyStarRating from './components/ReadOnlyStarRating';
+import Loading from '../Loading/LoadingComponent';
 
-const RenderComment = ({ comments, addComment, productId }) => {
-
-    const [commentModalOpen, setcommentModalOpen] = useState(false);
-
-    const toggleCommentModal = () => {
-        setcommentModalOpen(!commentModalOpen)
-    }
+const RenderComment = ({ comments, addComment, productId, toggleCommentModal, commentModalOpen }) => {
 
     if (comments == null) {
         return (<div></div>)
@@ -22,9 +17,12 @@ const RenderComment = ({ comments, addComment, productId }) => {
     const cmnts = comments.map(comment => {
         return (
             <li key={comment.id}>
-                <h6 className="text-primary">{comment.comment}</h6>
-                <ReadOnlyStarRating comments={comment.rating} />
-                <p className="text-muted">-- {comment.author},
+                <div className="d-flex justify-content-between">
+                    <h6 style={{ flexBasis: '60%' }} className="text-primary">{comment.comment}</h6>
+                    <ReadOnlyStarRating style={{ flexBasis: '40%' }} comments={comment.rating} />
+                </div>
+
+                <p className="text-muted text-right">-- {comment.author},
                         &nbsp;
                         {new Intl.DateTimeFormat('en-US', {
                     year: 'numeric',
@@ -32,6 +30,7 @@ const RenderComment = ({ comments, addComment, productId }) => {
                     day: '2-digit'
                 }).format(new Date(comment.date))}
                 </p>
+                <hr />
                 <CommentModel
                     toggleModal={toggleCommentModal}
                     modalOpen={commentModalOpen}
@@ -43,16 +42,9 @@ const RenderComment = ({ comments, addComment, productId }) => {
     })
     return (
         <div>
-            <h5 className='py-4 text-white'>Comments:</h5>
+            <h5 className='py-3 text-white'>Reviews:</h5>
             <ul className='list-unstyled'>
                 {cmnts}
-                <div className="py-1">
-                    <ButtonContainer
-                        onClick={() => toggleCommentModal()}
-                    >
-                        Add Comment
-                </ButtonContainer>
-                </div>
             </ul>
         </div>
     )
@@ -90,13 +82,36 @@ const RenderProduct = (props) => {
 const ProductDetail = (props) => {
 
     const [modalOpen, setmodalOpen] = useState(false);
+    const [commentModalOpen, setcommentModalOpen] = useState(false);
+
     const { title, company, inCart } = props.product;
+
+    const toggleCommentModal = () => {
+        setcommentModalOpen(!commentModalOpen)
+    }
 
     const toggleModal = () => {
         setmodalOpen(!modalOpen);
     }
-
-    if (props.product != null) {
+    if (props.isLoading) {
+        return (
+            <div className="container">
+                <div className="row">
+                    <Loading />
+                </div>
+            </div>
+        );
+    }
+    else if (props.errMess) {
+        return (
+            <div className="container">
+                <div className="row">
+                    <h4>{props.errMess}</h4>
+                </div>
+            </div>
+        );
+    }
+    else if (props.product != null) {
         return (
             <React.Fragment>
                 <div className="py-4">
@@ -119,27 +134,41 @@ const ProductDetail = (props) => {
                             <div className="col-md-6">
                                 <RenderProduct product={props.product} />
                             </div>
-                            <div className="col-md-6 py-4">
-                                <h2 className="text-white text-capitalize">model: {title}</h2>
-                                <h4 className="text-white text-uppercase mt-3 mb-2">
-                                    made by: <span className="text-uppercase">{company}</span>
-                                </h4>
+                            <div className="col-md-6 py-3">
+                                <table style={{ width: '100%' }}>
+                                    <tbody>
+                                        <tr style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                            <td style={{ flexBasis: "40%" }} className="text-white text-capitalize"><h4>model</h4></td>
+                                            <td style={{ flexBasis: "60%" }} className="text-white text-capitalize"><h4>{title}</h4></td>
+                                        </tr>
+                                        <tr style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                            <td style={{ flexBasis: "40%" }} className="text-white text-capitalize"><h5>made by</h5></td>
+                                            <td style={{ flexBasis: "60%" }} className="text-white text-capitalize"><h5>{company}</h5></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                                 <RenderComment
                                     comments={props.comments}
                                     addComment={props.addComment}
                                     productId={props.product.id}
+                                    toggleCommentModal={toggleCommentModal}
+                                    commentModalOpen={commentModalOpen}
                                 />
-                                <div>
+                                <div className="py-2">
                                     <ButtonContainer
                                         cart
                                         disabled={inCart ? true : false}
                                         onClick={() => {
                                             // props.addToCart(id);
-                                            // props.openModal(id);
                                             toggleModal();
                                         }}
                                     >
                                         {inCart ? "inCart" : "add to cart"}
+                                    </ButtonContainer>
+                                    <ButtonContainer
+                                        onClick={() => toggleCommentModal()}
+                                    >
+                                        Add Comment
                                     </ButtonContainer>
 
                                 </div>
@@ -193,5 +222,12 @@ const ProductDetailWrapper = styled.div`
     .img-container {
         position: relative;
         overflow: hidden;
+    }
+    .table-wrapper {
+        width: 100%;
+    }
+    .tableRow {
+       display: flex;
+       justify-content: space-between;
     }
 `

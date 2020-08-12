@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { addComment } from '../../redux/Actions/ActionCreators';
+import { addComment, fetchProduct } from '../../redux/Actions/ActionCreators';
 
 import Header from '../Header/Header';
 import Home from '../Home/Home';
@@ -21,16 +21,24 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    addComment: (productId, rating, author, comment) => dispatch(addComment(productId, rating, author, comment))
+    addComment: (productId, rating, author, comment) => dispatch(addComment(productId, rating, author, comment)),
+    fetchProduct: () => { dispatch(fetchProduct()) }
 });
 
 class ComponentWrapper extends Component {
 
-    render() {
 
+    componentDidMount() {
+        this.props.fetchProduct()
+        // console.log(product)
+    }
+
+    render() {
         const HomePage = () => {
             return (
-                <Home featuredProduct={this.props.products.filter((product) => product.featured)[0]}
+                <Home featuredProduct={this.props.products.products.filter((product) => product.featured)[0]}
+                    productsLoading={this.props.products.isLoading}
+                    productsErrMess={this.props.products.errMess}
                     featuredPromotion={this.props.promotions.filter((promotion) => promotion.featured)[0]}
                 />
             );
@@ -39,7 +47,9 @@ class ComponentWrapper extends Component {
         const ProductWithId = ({ match }) => {
             return (
                 <ProductDetail
-                    product={this.props.products.filter((product) => product.id === parseInt(match.params.productId, 10))[0]}
+                    product={this.props.products.products.filter((product) => product.id === parseInt(match.params.productId, 10))[0]}
+                    isLoading={this.props.products.isLoading}
+                    errMess={this.props.products.errMess}
                     comments={this.props.comments.filter((comment) => comment.productId === parseInt(match.params.productId, 10))
                     } openModal={this.openModal}
                     addComment={this.props.addComment}

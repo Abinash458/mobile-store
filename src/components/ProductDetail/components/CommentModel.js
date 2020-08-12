@@ -37,7 +37,7 @@ const RenderCommentModel = (props) => {
                                 name="author"
                                 placeholder="Name"
                                 validators={{
-                                    required, minLength: minLength(3), maxLength: maxLength(15)
+                                    required, minLength: minLength(3), maxLength: maxLength(20)
                                 }}
                             />
                             <Errors
