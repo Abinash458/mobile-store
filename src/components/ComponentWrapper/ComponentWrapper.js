@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { actions } from 'react-redux-form';
+
 import { addComment, fetchProduct } from '../../redux/Actions/ActionCreators';
 
 import Header from '../Header/Header';
@@ -22,7 +24,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch) => ({
     addComment: (productId, rating, author, comment) => dispatch(addComment(productId, rating, author, comment)),
-    fetchProduct: () => { dispatch(fetchProduct()) }
+    fetchProduct: () => { dispatch(fetchProduct()) },
+    resetFeedbackForm: () => { dispatch(actions.reset('feedback')) }
 });
 
 class ComponentWrapper extends Component {
@@ -63,7 +66,7 @@ class ComponentWrapper extends Component {
                     <Route path="/home" component={HomePage} />
                     <Route exact path="/shop" component={() => <ProductList products={this.props.products} />} />
                     <Route path='/shop/:productId' component={ProductWithId} />
-                    <Route exact path='/contactus' component={ContactPage} />
+                    <Route exact path='/contactus' component={() => <ContactPage resetFeedbackForm={this.props.resetFeedbackForm} />} />
                     <Redirect to="/home" />
                 </Switch>
                 <Footer />

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Breadcrumb, BreadcrumbItem, Label } from 'reactstrap';
-import { Control, LocalForm, Errors } from 'react-redux-form';
+import { Control, Form, Errors } from 'react-redux-form';
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import cx from 'classnames';
@@ -14,8 +14,8 @@ const validEmail = (val) => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val
 class ContactPage extends Component {
 
     handleSubmit = (values) => {
-        console.log("Current State is: " + JSON.stringify(values));
-        alert("Current State is: " + JSON.stringify(values))
+        alert("Current State is: " + JSON.stringify(values));
+        this.props.resetFeedbackForm();
     }
 
     render() {
@@ -37,7 +37,7 @@ class ContactPage extends Component {
                     <div className="contact-box">
                         <div className="contact-left">
                             <h3>Sent Your Request</h3>
-                            <LocalForm onSubmit={(values) => this.handleSubmit(values)}>
+                            <Form model="feedback" onSubmit={(values) => this.handleSubmit(values)}>
                                 <div className="input-row">
                                     <div className="input-group">
                                         <Label>
@@ -189,7 +189,7 @@ class ContactPage extends Component {
                                 <button type="submit">
                                     Send Feedback
                                 </button>
-                            </LocalForm>
+                            </Form>
                         </div>
                         <div className="contact-right">
                             <h3>Reach Us</h3>
@@ -303,6 +303,7 @@ const ContactPageWrapper = styled.div`
         width: 100%;
         border: none;
         border-bottom: 1px solid #ccc;
+        padding: 0;
         outline: none;
         padding-bottom: 5px;
         background-color: transparent;
