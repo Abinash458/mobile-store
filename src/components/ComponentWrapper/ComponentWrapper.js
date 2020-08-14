@@ -4,7 +4,7 @@ import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { actions } from 'react-redux-form';
 
-import { addComment, fetchProduct, fetchComments, fetchPromotions } from '../../redux/Actions/ActionCreators';
+import { postComment, fetchProduct, fetchComments, fetchPromotions } from '../../redux/Actions/ActionCreators';
 
 import Header from '../Header/Header';
 import Home from '../Home/Home';
@@ -23,7 +23,7 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    addComment: (productId, rating, author, comment) => dispatch(addComment(productId, rating, author, comment)),
+    postComment: (productId, rating, author, comment) => dispatch(postComment(productId, rating, author, comment)),
     fetchProduct: () => { dispatch(fetchProduct()) },
     fetchComments: () => { dispatch(fetchComments()) },
     fetchPromotions: () => { dispatch(fetchPromotions()) },
@@ -61,7 +61,7 @@ class ComponentWrapper extends Component {
                     comments={this.props.comments.comments.filter((comment) => comment.productId === parseInt(match.params.productId, 10))
                     }
                     commentsErrMess={this.props.comments.errMess}
-                    addComment={this.props.addComment}
+                    postComment={this.props.postComment}
                 />
             );
         }

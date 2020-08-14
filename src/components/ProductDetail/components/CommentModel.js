@@ -22,6 +22,7 @@ const RenderCommentModel = (props) => {
                                 type="select"
                                 className={cx("select", "form-control")}
                                 name="contactType">
+                                <option>--select rating--</option>
                                 <option>1</option>
                                 <option>2</option>
                                 <option>3</option>
@@ -85,7 +86,7 @@ const RenderCommentModel = (props) => {
 const CommentModel = (props) => {
 
     const handleCommentSubmit = (value) => {
-        props.addComment(props.productId, value.rating, value.author, value.comment);
+        props.postComment(props.productId, value.rating, value.author, value.comment);
         props.toggleModal();
     }
 

@@ -10,7 +10,7 @@ import ReadOnlyStarRating from './components/ReadOnlyStarRating';
 import Loading from '../Loading/LoadingComponent';
 import { baseUrl } from '../../shared/baseUrl';
 
-const RenderComment = ({ comments, addComment, productId, toggleCommentModal, commentModalOpen }) => {
+const RenderComment = ({ comments, postComment, productId, toggleCommentModal, commentModalOpen }) => {
 
     if (comments == null) {
         return (<div></div>)
@@ -35,7 +35,7 @@ const RenderComment = ({ comments, addComment, productId, toggleCommentModal, co
                 <CommentModel
                     toggleModal={toggleCommentModal}
                     modalOpen={commentModalOpen}
-                    addComment={addComment}
+                    postComment={postComment}
                     productId={productId}
                 />
             </li>
@@ -146,7 +146,7 @@ const ProductDetail = (props) => {
                                 </table>
                                 <RenderComment
                                     comments={props.comments}
-                                    addComment={props.addComment}
+                                    postComment={props.postComment}
                                     productId={props.product.id}
                                     toggleCommentModal={toggleCommentModal}
                                     commentModalOpen={commentModalOpen}
