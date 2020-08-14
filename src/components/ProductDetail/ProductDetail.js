@@ -8,6 +8,7 @@ import Modal from "../Cart/components/GotoCartModal";
 import CommentModel from "./components/CommentModel";
 import ReadOnlyStarRating from './components/ReadOnlyStarRating';
 import Loading from '../Loading/LoadingComponent';
+import { baseUrl } from '../../shared/baseUrl';
 
 const RenderComment = ({ comments, addComment, productId, toggleCommentModal, commentModalOpen }) => {
 
@@ -57,7 +58,7 @@ const RenderProduct = ({ product }) => {
             <ProductDetailWrapper>
                 <div className="card">
                     <div className="img-container p-5">
-                        <img alt={title} src={image} className="card-img-top" />
+                        <img alt={title} src={baseUrl + image} className="card-img-top" />
                     </div>
                     <div className="card-footer">
                         <div className="d-flex justify-content-between">

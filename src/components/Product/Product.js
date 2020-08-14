@@ -2,6 +2,7 @@ import React from 'react'
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import { baseUrl } from '../../shared/baseUrl';
 
 const Product = (props) => {
   // console.log(props)
@@ -14,7 +15,7 @@ const Product = (props) => {
             className="img-container p-5"
           // onClick={}
           >
-            <img src={image} alt="productImage" className="card-img-top" />
+            <img src={baseUrl + image} alt="productImage" className="card-img-top" />
           </div>
           <div className="card-footer d-flex justify-content-between">
             <p className="align-self-center mb-0 card-title">{title}</p>

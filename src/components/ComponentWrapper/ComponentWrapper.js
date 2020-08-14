@@ -4,7 +4,7 @@ import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { actions } from 'react-redux-form';
 
-import { addComment, fetchProduct } from '../../redux/Actions/ActionCreators';
+import { addComment, fetchProduct, fetchComments, fetchPromotions } from '../../redux/Actions/ActionCreators';
 
 import Header from '../Header/Header';
 import Home from '../Home/Home';
@@ -25,6 +25,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = (dispatch) => ({
     addComment: (productId, rating, author, comment) => dispatch(addComment(productId, rating, author, comment)),
     fetchProduct: () => { dispatch(fetchProduct()) },
+    fetchComments: () => { dispatch(fetchComments()) },
+    fetchPromotions: () => { dispatch(fetchPromotions()) },
     resetFeedbackForm: () => { dispatch(actions.reset('feedback')) }
 });
 
@@ -33,6 +35,8 @@ class ComponentWrapper extends Component {
 
     componentDidMount() {
         this.props.fetchProduct()
+        this.props.fetchComments()
+        this.props.fetchPromotions()
     }
 
     render() {
@@ -41,7 +45,9 @@ class ComponentWrapper extends Component {
                 <Home featuredProduct={this.props.products.products.filter((product) => product.featured)[0]}
                     productsLoading={this.props.products.isLoading}
                     productsErrMess={this.props.products.errMess}
-                    featuredPromotion={this.props.promotions.filter((promotion) => promotion.featured)[0]}
+                    featuredPromotion={this.props.promotions.promotions.filter((promotion) => promotion.featured)[0]}
+                    promotionsLoading={this.props.promotions.isLoading}
+                    promotionsErrMess={this.props.promotions.errMess}
                 />
             );
         }
@@ -52,8 +58,9 @@ class ComponentWrapper extends Component {
                     product={this.props.products.products.filter((product) => product.id === parseInt(match.params.productId, 10))[0]}
                     isLoading={this.props.products.isLoading}
                     errMess={this.props.products.errMess}
-                    comments={this.props.comments.filter((comment) => comment.productId === parseInt(match.params.productId, 10))
-                    } openModal={this.openModal}
+                    comments={this.props.comments.comments.filter((comment) => comment.productId === parseInt(match.params.productId, 10))
+                    }
+                    commentsErrMess={this.props.comments.errMess}
                     addComment={this.props.addComment}
                 />
             );

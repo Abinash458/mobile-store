@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from "styled-components";
 import Loading from '../Loading/LoadingComponent';
+import { baseUrl } from '../../shared/baseUrl';
 
 function RenderCard({ item, isLoading, errMess }) {
     if (isLoading) {
@@ -18,7 +19,7 @@ function RenderCard({ item, isLoading, errMess }) {
             <FeaturedCard className="py-5">
                 <div className="card">
                     <div className="img-container p-5">
-                        <img src={item.image} alt={item.title} className="card-img-top" />
+                        <img src={baseUrl + item.image} alt={item.title} className="card-img-top" />
                     </div>
                     <div className="card-footer">
                         <div className="d-flex justify-content-between">
@@ -48,8 +49,8 @@ function Home(props) {
                 <div className="col-12 col-md">
                     <RenderCard
                         item={props.featuredPromotion}
-                    // isLoading={props.productsLoading} 
-                    // errMess={props.productsErrMess} 
+                        isLoading={props.promotionsLoading}
+                        errMess={props.promotionsErrMess}
                     />
                 </div>
             </div>
