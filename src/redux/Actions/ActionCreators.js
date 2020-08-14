@@ -14,9 +14,25 @@ export const addComment = (productId, rating, author, comment) => ({
 export const fetchProduct = () => (dispatch) => {
     dispatch(productsLoading(true));
 
-    return fetch(baseUrl + 'products')
+    return fetch(baseUrl + '/products')
+        // handling errors
+        .then(response => {
+            if (response.ok) {
+                return response;
+            }
+            else {
+                var error = new Error('Error ' + response.status + ": " + response.statusText)
+                error.response = response;
+                throw error;
+            }
+        },
+            error => {
+                var errorMessage = new Error(error.message);
+                throw errorMessage;
+            })
         .then(response => response.json())
-        .then(products => dispatch(addProducts(products)));
+        .then(products => dispatch(addProducts(products)))
+        .catch(error => dispatch(productsFailed(error.message)));
 }
 
 export const productsLoading = () => ({
@@ -37,9 +53,25 @@ export const addProducts = (products) => ({
 // Fetch Comments
 export const fetchComments = () => (dispatch) => {
 
-    return fetch(baseUrl + 'comments')
+    return fetch(baseUrl + '/comments')
+        // handling errors
+        .then(response => {
+            if (response.ok) {
+                return response;
+            }
+            else {
+                var error = new Error('Error ' + response.status + ": " + response.statusText)
+                error.response = response;
+                throw error;
+            }
+        },
+            error => {
+                var errorMessage = new Error(error.message);
+                throw errorMessage;
+            })
         .then(response => response.json())
-        .then(comments => dispatch(addComments(comments)));
+        .then(comments => dispatch(addComments(comments)))
+        .catch(error => dispatch(commentsFailed(error.message)));
 }
 
 export const commentsFailed = (errMess) => ({
@@ -56,9 +88,25 @@ export const addComments = (comments) => ({
 export const fetchPromotions = () => (dispatch) => {
     dispatch(promotionLoading(true));
 
-    return fetch(baseUrl + 'promotions')
+    return fetch(baseUrl + '/promotions')
+        // handling errors
+        .then(response => {
+            if (response.ok) {
+                return response;
+            }
+            else {
+                var error = new Error('Error ' + response.status + ": " + response.statusText)
+                error.response = response;
+                throw error;
+            }
+        },
+            error => {
+                var errorMessage = new Error(error.message);
+                throw errorMessage;
+            })
         .then(response => response.json())
-        .then(promotions => dispatch(addPromotions(promotions)));
+        .then(promotions => dispatch(addPromotions(promotions)))
+        .catch(error => dispatch(promotionsFailed(error.message)));
 }
 
 export const promotionLoading = () => ({

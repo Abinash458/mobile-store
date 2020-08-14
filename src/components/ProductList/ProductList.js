@@ -15,19 +15,15 @@ const ProductList = (props) => {
     })
     if (props.products.isLoading) {
         return (
-            <div className="container">
-                <div className="row">
-                    <Loading />
-                </div>
+            <div>
+                <Loading />
             </div>
         );
     }
     else if (props.products.errMess) {
         return (
-            <div className="container">
-                <div className="row">
-                    <h4>{props.products.errMess}</h4>
-                </div>
+            <div>
+                <h4 className="text-white py-5 m-0 text-center"> {props.products.errMess}</h4 >
             </div>
         );
     }

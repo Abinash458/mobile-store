@@ -11,7 +11,7 @@ function RenderCard({ item, isLoading, errMess }) {
     }
     else if (errMess) {
         return (
-            <h4>{errMess}</h4>
+            <h4 className="text-white py-5 m-0 text-center">{errMess}</h4>
         )
     }
     else {

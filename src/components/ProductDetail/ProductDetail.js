@@ -94,19 +94,17 @@ const ProductDetail = (props) => {
     }
     if (props.isLoading) {
         return (
-            <div className="container">
-                <div className="row">
-                    <Loading />
-                </div>
+            <div>
+                {/* <div className="row"> */}
+                <Loading />
+                {/* </div> */}
             </div>
         );
     }
     else if (props.errMess) {
         return (
-            <div className="container">
-                <div className="row">
-                    <h4>{props.errMess}</h4>
-                </div>
+            <div>
+                <h4 className="text-white py-5 m-0 text-center">{props.errMess}</h4>
             </div>
         );
     }
