@@ -4,7 +4,7 @@ import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { actions } from 'react-redux-form';
 
-import { postComment, fetchProduct, fetchComments, fetchPromotions } from '../../redux/Actions/ActionCreators';
+import { postComment, postFeedback, fetchProduct, fetchComments, fetchPromotions } from '../../redux/Actions/ActionCreators';
 
 import Header from '../Header/Header';
 import Home from '../Home/Home';
@@ -24,6 +24,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch) => ({
     postComment: (productId, rating, author, comment) => dispatch(postComment(productId, rating, author, comment)),
+    postFeedback: (firstName, lastName, telNum, email, agree, contactType, message) => dispatch(postFeedback(firstName, lastName, telNum, email, agree, contactType, message)),
     fetchProduct: () => { dispatch(fetchProduct()) },
     fetchComments: () => { dispatch(fetchComments()) },
     fetchPromotions: () => { dispatch(fetchPromotions()) },
@@ -73,7 +74,7 @@ class ComponentWrapper extends Component {
                     <Route path="/home" component={HomePage} />
                     <Route exact path="/shop" component={() => <ProductList products={this.props.products} />} />
                     <Route path='/shop/:productId' component={ProductWithId} />
-                    <Route exact path='/contactus' component={() => <ContactPage resetFeedbackForm={this.props.resetFeedbackForm} />} />
+                    <Route exact path='/contactus' component={() => <ContactPage resetFeedbackForm={this.props.resetFeedbackForm} postFeedback={this.props.postFeedback} />} />
                     <Redirect to="/home" />
                 </Switch>
                 <Footer />

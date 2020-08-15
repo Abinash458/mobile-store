@@ -14,7 +14,8 @@ const validEmail = (val) => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val
 class ContactPage extends Component {
 
     handleSubmit = (values) => {
-        alert("Current State is: " + JSON.stringify(values));
+        // alert("Current State is: " + JSON.stringify(values));
+        this.props.postFeedback(values.firstName, values.lastName, values.telNum, values.email, values.agree, values.contactType, values.message);
         this.props.resetFeedbackForm();
     }
 
