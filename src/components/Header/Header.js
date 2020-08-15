@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Navbar, NavbarBrand, Nav, NavbarToggler, Collapse, NavItem, Jumbotron, Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input } from 'reactstrap';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import { ButtonContainer } from '../StyledComponents/Button';
 
 
@@ -34,7 +34,7 @@ export default class Header extends Component {
                 <Navbar dark expand="md">
                     <div className="container">
                         <NavbarToggler onClick={this.toggleNav} />
-                        <NavbarBrand className="text-uppercase mr-4" href="/">Product Catalog</NavbarBrand>
+                        <NavbarBrand className="text-uppercase mr-4" href="/">Product</NavbarBrand>
                         <Collapse isOpen={this.state.isNavOpen} navbar>
                             <Nav navbar>
                                 <NavItem onClick={this.toggleNav}>
@@ -58,6 +58,11 @@ export default class Header extends Component {
                                     <ButtonContainer onClick={this.toggleLoginModal}>
                                         <span className="fa fa-sign-in fa-lg"></span> Login
                                     </ButtonContainer>
+                                    <Link to="/cart">
+                                        <ButtonContainer cart>
+                                            <span className="fas fa-cart-plus"></span> My Cart
+                                        </ButtonContainer>
+                                    </Link>
                                 </NavItem>
                             </Nav>
                         </Collapse>

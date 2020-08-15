@@ -63,9 +63,9 @@ body {
   background: transparent;
   text-transform: capitalize;
   font-size: 0.8rem !important;
-  color: var(--mainDark);
+  color: var(--mainWhite);
   border-radius: 0 !important;
-  border: 0.1rem solid var(--mainDark) !important;
+  border: 0.1rem solid var(--mainWhite) !important;
 }
 
 .btn-black:hover {

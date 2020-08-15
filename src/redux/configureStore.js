@@ -4,6 +4,7 @@ import { createForms } from 'react-redux-form';
 import { Products } from './Reducer/productsReducer';
 import { Comments } from './Reducer/commentsReducer';
 import { Promotion } from './Reducer/promotionReducer';
+import { Cart } from './Reducer/cartReducer';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 import { InitialFeedback } from './Reducer/FormsReducer';
@@ -14,6 +15,7 @@ export const ConfigureStore = () => {
             products: Products,
             comments: Comments,
             promotions: Promotion,
+            cartItems: Cart,
             ...createForms({
                 feedback: InitialFeedback
             })

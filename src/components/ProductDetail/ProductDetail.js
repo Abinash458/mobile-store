@@ -92,12 +92,11 @@ const ProductDetail = (props) => {
     const toggleModal = () => {
         setmodalOpen(!modalOpen);
     }
+
     if (props.isLoading) {
         return (
             <div>
-                {/* <div className="row"> */}
                 <Loading />
-                {/* </div> */}
             </div>
         );
     }
@@ -156,11 +155,11 @@ const ProductDetail = (props) => {
                                         cart
                                         disabled={props.product.inCart ? true : false}
                                         onClick={() => {
-                                            // props.addToCart(id);
+                                            props.addToCart(props.product);
                                             toggleModal();
                                         }}
                                     >
-                                        {props.product.widthinCart ? "inCart" : "add to cart"}
+                                        {props.product.inCart ? "inCart" : "add to cart"}
                                     </ButtonContainer>
                                     <ButtonContainer
                                         onClick={() => toggleCommentModal()}

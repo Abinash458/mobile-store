@@ -128,6 +128,38 @@ export const addProducts = (products) => ({
     payload: products,
 });
 
+// Cart Function
+
+export const addToCart = (cartItems) => (dispatch) => {
+
+    // console.log("SelectedProduct", cartItems)
+    let tempProducts = [cartItems];
+    const index = tempProducts.indexOf(tempProducts.find((item) => item.id === cartItems.id));
+    const product = tempProducts[index];
+    product.inCart = true;
+    product.count = 1;
+    const price = product.price;
+    product.total = price;
+    // localStorage.setItem("cartItems", JSON.stringify(product));
+    let newCartItem = [product];
+    console.log(newCartItem);
+    dispatch(addCart(newCartItem));
+
+}
+
+// export const cartLoading = () => ({
+//     type: ActionTypes.CART_LOADING
+// });
+
+// export const cartFailed = (errMess) => ({
+//     type: ActionTypes.CART_FAILED,
+//     payload: errMess
+// })
+
+export const addCart = (cartItems) => ({
+    type: ActionTypes.ADD_TO_CART,
+    payload: cartItems,
+});
 
 // Fetch Comments
 export const fetchComments = () => (dispatch) => {
