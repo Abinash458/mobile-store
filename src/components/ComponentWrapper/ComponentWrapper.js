@@ -12,7 +12,7 @@ import ProductList from '../ProductList/ProductList';
 import ProductDetail from '../ProductDetail/ProductDetail';
 import ContactPage from "../Contact/ContactPage";
 import Footer from "../Footer/Footer";
-import Cart from '../Cart/Cart';
+import CartComponent from '../Cart/CartComponent';
 
 
 const mapStateToProps = state => {
@@ -20,14 +20,14 @@ const mapStateToProps = state => {
         products: state.products,
         comments: state.comments,
         promotions: state.promotions,
-        cartItems: state.cartItems
+        cart: state.cart
     }
 }
 
 const mapDispatchToProps = (dispatch) => ({
     postComment: (productId, rating, author, comment) => dispatch(postComment(productId, rating, author, comment)),
     postFeedback: (firstName, lastName, telNum, email, agree, contactType, message) => dispatch(postFeedback(firstName, lastName, telNum, email, agree, contactType, message)),
-    addToCart: (cartItems) => dispatch(addToCart(cartItems)),
+    addToCart: (product, items) => dispatch(addToCart(product, items)),
     fetchProduct: () => { dispatch(fetchProduct()) },
     fetchComments: () => { dispatch(fetchComments()) },
     fetchPromotions: () => { dispatch(fetchPromotions()) },
@@ -40,33 +40,10 @@ class ComponentWrapper extends Component {
         this.props.fetchProduct()
         this.props.fetchComments()
         this.props.fetchPromotions()
-        // this.props.addToCart()
     }
 
-    // addToCart = (id) => {
-    //     const fetchedProduct = this.props.fetchProduct()
-    //     let tempProducts = [fetchedProduct];
-    //     console.log(tempProducts)
-    // const index = tempProducts.indexOf(tempProducts.find((item) => item.id === id));
-    // const product = tempProducts[index];
-    // product.inCart = true;
-    // product.count = 1;
-    // console.log(product);
-    // const price = product.price;
-    // product.total = price;
-    // this.setState(
-    //     () => {
-    //         return {
-    //             cart: [...this.state.cart],
-    //         };
-    //     },
-    //     () => {
-    //         this.addTotals();
-    //     }
-    // );
-    // };
-
     render() {
+        // console.log(this.props.cart.cart)
         const HomePage = () => {
             return (
                 <Home featuredProduct={this.props.products.products.filter((product) => product.featured)[0]}
@@ -90,13 +67,14 @@ class ComponentWrapper extends Component {
                     commentsErrMess={this.props.comments.errMess}
                     postComment={this.props.postComment}
                     addToCart={this.props.addToCart}
+                    cartItems={this.props.cart.cart}
                 />
             );
         }
 
         const CartWithId = () => {
             return (
-                <Cart cartItems={this.props.cartItems} />
+                <CartComponent cartItems={this.props.cart.cart} />
             )
         }
 

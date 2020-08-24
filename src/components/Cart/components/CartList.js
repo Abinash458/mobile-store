@@ -3,10 +3,10 @@ import CartItem from "./CartItem";
 
 const CartList = (props) => {
     // const { cart } = props;
-    // console.log("cart =>", props.cartItems.cartItems)
+    // console.log("cart =>", props.cartItems)
     return (
         <div className="container-fluid">
-            {props.cartItems.cartItems.map((item) => {
+            {props.cartItems.map((item) => {
                 return <CartItem key={item.id} item={item} {...props} />;
             })}
         </div>

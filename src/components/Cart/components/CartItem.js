@@ -6,7 +6,7 @@ const CartItem = (props) => {
     const { increment, decrement, removeItem } = props;
     return (
         <div className="row my-2 text-capitalize text-center text-white">
-            <div className="col-10 mx-auto col-lg-2">
+            <div className="col-10 mx-auto col-lg-2 d-flex justify-content-center align-items-center">
                 <img
                     src={baseUrl + image}
                     style={{ width: "5rem", height: "5rem" }}
@@ -14,15 +14,15 @@ const CartItem = (props) => {
                     alt="product"
                 />
             </div>
-            <div className="col-10 mx-auto col-lg-2">
+            <div className="col-10 mx-auto col-lg-2 d-flex justify-content-center align-items-center">
                 <span className="d-lg-none"> product : </span>
                 {title}
             </div>
-            <div className="col-10 mx-auto col-lg-2">
+            <div className="col-10 mx-auto col-lg-2 d-flex justify-content-center align-items-center">
                 <span className="d-lg-none"> price : </span>{" "}
                 <strong>&#8377;{price}</strong>
             </div>
-            <div className="col-10 mx-auto col-lg-2 my-2 my-lg-0">
+            <div className="col-10 mx-auto col-lg-2 my-2 my-lg-0 d-flex justify-content-center align-items-center">
                 <div className="d-flex justify-content-center">
                     <div>
                         <span className="btn btn-black mx-1" onClick={() => decrement(id)}>
@@ -35,12 +35,12 @@ const CartItem = (props) => {
                     </div>
                 </div>
             </div>
-            <div className="col-10 mx-auto col-lg-2">
+            <div className="col-10 mx-auto col-lg-2 d-flex justify-content-center align-items-center">
                 <div className="cart-icon" onClick={() => removeItem(id)}>
                     <i className="fas fa-trash"></i>
                 </div>
             </div>
-            <div className="col-10 mx-auto col-lg-2">
+            <div className="col-10 mx-auto col-lg-2 d-flex justify-content-center align-items-center">
                 <strong> item total: &#8377; </strong>
                 {total}
             </div>

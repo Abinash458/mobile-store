@@ -7,9 +7,8 @@ import EmptyCart from './components/EmptyCart';
 import CartColumns from "./components/CartColumns";
 import CartList from "./components/CartList";
 
-const Cart = (props) => {
-    // console.log(props.cartItems.lenght)
-    if (props.cartItems.cartItems.length > 0) {
+const CartComponent = (props) => {
+    if (props.cartItems.length > 0) {
         return (
             <React.Fragment>
                 <div className="container">
@@ -20,7 +19,7 @@ const Cart = (props) => {
                             </BreadcrumbItem>
                             <BreadcrumbItem active>
                                 My Cart
-                     </BreadcrumbItem>
+                            </BreadcrumbItem>
                         </Breadcrumb>
                         <div className="col-12 text-white">
                             <h3>My Cart</h3>
@@ -41,7 +40,7 @@ const Cart = (props) => {
     }
 }
 
-export default Cart;
+export default CartComponent;
 
 // const CartWrapper = styled.div`
 

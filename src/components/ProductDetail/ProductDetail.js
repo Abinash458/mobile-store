@@ -81,7 +81,6 @@ const RenderProduct = ({ product }) => {
 }
 
 const ProductDetail = (props) => {
-
     const [modalOpen, setmodalOpen] = useState(false);
     const [commentModalOpen, setcommentModalOpen] = useState(false);
 
@@ -155,7 +154,7 @@ const ProductDetail = (props) => {
                                         cart
                                         disabled={props.product.inCart ? true : false}
                                         onClick={() => {
-                                            props.addToCart(props.product);
+                                            props.addToCart(props.product, props.cartItems)
                                             toggleModal();
                                         }}
                                     >

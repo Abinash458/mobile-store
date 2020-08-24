@@ -4,11 +4,9 @@ import { BrowserRouter as Router } from "react-router-dom";
 import './App.css';
 
 import { Provider } from 'react-redux';
-import { ConfigureStore } from './redux/configureStore';
+import store from './redux/configureStore';
 
 import ComponentWrapper from './components/ComponentWrapper/ComponentWrapper';
-
-const store = ConfigureStore();
 
 
 class App extends Component {

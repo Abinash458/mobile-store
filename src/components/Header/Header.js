@@ -55,9 +55,9 @@ export default class Header extends Component {
                             </Nav>
                             <Nav className="ml-auto" navbar>
                                 <NavItem>
-                                    <ButtonContainer onClick={this.toggleLoginModal}>
+                                    {/* <ButtonContainer onClick={this.toggleLoginModal}>
                                         <span className="fa fa-sign-in fa-lg"></span> Login
-                                    </ButtonContainer>
+                                    </ButtonContainer> */}
                                     <Link to="/cart">
                                         <ButtonContainer cart>
                                             <span className="fas fa-cart-plus"></span> My Cart

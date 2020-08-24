@@ -130,31 +130,43 @@ export const addProducts = (products) => ({
 
 // Cart Function
 
-export const addToCart = (cartItems) => (dispatch) => {
+export const addToCart = (product, items) => (dispatch) => {
+    try {
+        dispatch(cartLoading(true));
+        const cartItems = items.slice()
+        let productAlreadyInCart = false;
 
-    // console.log("SelectedProduct", cartItems)
-    let tempProducts = [cartItems];
-    const index = tempProducts.indexOf(tempProducts.find((item) => item.id === cartItems.id));
-    const product = tempProducts[index];
-    product.inCart = true;
-    product.count = 1;
-    const price = product.price;
-    product.total = price;
-    // localStorage.setItem("cartItems", JSON.stringify(product));
-    let newCartItem = [product];
-    console.log(newCartItem);
-    dispatch(addCart(newCartItem));
-
+        cartItems.filter((cartProd) => {
+            if (cartProd.id === product.id) {
+                product.inCart = true;
+                cartProd.count = 1;
+                productAlreadyInCart = true;
+                let price = cartProd.price;
+                cartProd.total = price;
+                console.log(product.inCart);
+            }
+            return cartProd;
+        });
+        if (!productAlreadyInCart) {
+            cartItems.push({ ...product });
+        }
+        localStorage.setItem("cartItems", JSON.stringify(cartItems));
+        dispatch(addCart(cartItems));
+    } catch (error) {
+        dispatch(cartFailed(error))
+    }
 }
 
-// export const cartLoading = () => ({
-//     type: ActionTypes.CART_LOADING
-// });
 
-// export const cartFailed = (errMess) => ({
-//     type: ActionTypes.CART_FAILED,
-//     payload: errMess
-// })
+
+export const cartLoading = () => ({
+    type: ActionTypes.CART_LOADING
+});
+
+export const cartFailed = (errMess) => ({
+    type: ActionTypes.CART_FAILED,
+    payload: errMess
+})
 
 export const addCart = (cartItems) => ({
     type: ActionTypes.ADD_TO_CART,
