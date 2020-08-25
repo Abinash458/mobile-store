@@ -153,10 +153,10 @@ const ProductDetail = (props) => {
                                     <ButtonContainer
                                         cart
                                         disabled={props.product.inCart ? true : false}
-                                        onClick={() => {
+                                        onClick={() =>
                                             props.addToCart(props.product, props.cartItems)
-                                            toggleModal();
-                                        }}
+                                            // toggleModal();
+                                        }
                                     >
                                         {props.product.inCart ? "inCart" : "add to cart"}
                                     </ButtonContainer>

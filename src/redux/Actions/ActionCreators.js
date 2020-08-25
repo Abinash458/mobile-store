@@ -130,28 +130,22 @@ export const addProducts = (products) => ({
 
 // Cart Function
 
-export const addToCart = (product, items) => (dispatch) => {
+export const addToCart = (products, items) => (dispatch) => {
     try {
         dispatch(cartLoading(true));
-        const cartItems = items.slice()
-        let productAlreadyInCart = false;
+        const cartItems = items.slice();
 
-        cartItems.filter((cartProd) => {
-            if (cartProd.id === product.id) {
-                product.inCart = true;
-                cartProd.count = 1;
-                productAlreadyInCart = true;
-                let price = cartProd.price;
-                cartProd.total = price;
-                console.log(product.inCart);
-            }
-            return cartProd;
-        });
-        if (!productAlreadyInCart) {
-            cartItems.push({ ...product });
+        const cart = cartItems.filter((cartProd) => cartProd.id === products.id);
+        if (cart) {
+            products.inCart = true;
+            products.count = 1;
+            const price = products.price;
+            products.total = price;
+            cart.push(products);
         }
-        localStorage.setItem("cartItems", JSON.stringify(cartItems));
-        dispatch(addCart(cartItems));
+
+        localStorage.setItem("cartItems", JSON.stringify(cart));
+        dispatch(addCart(cart));
     } catch (error) {
         dispatch(cartFailed(error))
     }
