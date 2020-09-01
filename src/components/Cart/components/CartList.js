@@ -6,7 +6,7 @@ const CartList = (props) => {
     // console.log("cart =>", props.cartItems)
     return (
         <div className="container-fluid">
-            {props.cartItems.map((item) => {
+            {props.cart.map((item) => {
                 return <CartItem key={item.id} item={item} {...props} />;
             })}
         </div>

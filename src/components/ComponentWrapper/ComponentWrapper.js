@@ -14,27 +14,15 @@ import ContactPage from "../Contact/ContactPage";
 import Footer from "../Footer/Footer";
 import CartComponent from '../Cart/CartComponent';
 
-
-const mapStateToProps = state => {
-    return {
-        products: state.products,
-        comments: state.comments,
-        promotions: state.promotions,
-        cart: state.cart
-    }
-}
-
-const mapDispatchToProps = (dispatch) => ({
-    postComment: (productId, rating, author, comment) => dispatch(postComment(productId, rating, author, comment)),
-    postFeedback: (firstName, lastName, telNum, email, agree, contactType, message) => dispatch(postFeedback(firstName, lastName, telNum, email, agree, contactType, message)),
-    addToCart: (product, items) => dispatch(addToCart(product, items)),
-    fetchProduct: () => { dispatch(fetchProduct()) },
-    fetchComments: () => { dispatch(fetchComments()) },
-    fetchPromotions: () => { dispatch(fetchPromotions()) },
-    resetFeedbackForm: () => { dispatch(actions.reset('feedback')) }
-});
-
 class ComponentWrapper extends Component {
+
+    // constructor(props) {
+    //     super(props);
+    //     this.state = {
+    //         cart: []
+    //     }
+    // }
+
 
     componentDidMount() {
         this.props.fetchProduct()
@@ -42,8 +30,50 @@ class ComponentWrapper extends Component {
         this.props.fetchPromotions()
     }
 
+    // handleAddToCart = (product) => {
+    //     // const existingProductIndex = this.state.cart.findIndex(ep => ep.id === product.id);
+    //     // if (existingProductIndex >= 0) {
+
+    //     //     const cartProducts = this.state.cart.slice();
+
+    //     //     const existingProduct = cartProducts[existingProductIndex];
+
+    //     //     product.inCart = true;
+    //     //     product.count = 1;
+    //     //     const price = product.price;
+    //     //     product.total = price;
+    //     //     this.setState(
+    //     //         () => {
+    //     //             return {
+    //     //                 cart: existingProduct
+    //     //             };
+    //     //         }
+    //     //     );
+    //     // }
+    //     // else {
+    //     //     this.setState(
+    //     //         () => {
+    //     //             return {
+    //     //                 cart: [...this.state.cart, product],
+    //     //             };
+    //     //         }
+    //     //     );
+    //     // }
+    //     product.inCart = true;
+    //     product.count = 1;
+    //     const price = product.price;
+    //     product.total = price;
+    //     this.setState(
+    //         () => {
+    //             return {
+    //                 cart: [...this.state.cart, product],
+    //             };
+    //         }
+    //     );
+    // }
+
     render() {
-        // console.log(this.props.cart.cart)
+        // console.log("Cart", this.props.cart.cart)
         const HomePage = () => {
             return (
                 <Home featuredProduct={this.props.products.products.filter((product) => product.featured)[0]}
@@ -68,13 +98,16 @@ class ComponentWrapper extends Component {
                     postComment={this.props.postComment}
                     addToCart={this.props.addToCart}
                     cartItems={this.props.cart.cart}
+                // handleAddToCart={this.handleAddToCart}
                 />
             );
         }
 
         const CartWithId = () => {
             return (
-                <CartComponent cartItems={this.props.cart.cart} />
+                <CartComponent
+                    cart={this.props.cart.cart}
+                />
             )
         }
 
@@ -94,5 +127,24 @@ class ComponentWrapper extends Component {
         )
     }
 }
+
+const mapStateToProps = state => {
+    return {
+        products: state.products,
+        comments: state.comments,
+        promotions: state.promotions,
+        cart: state.cart
+    }
+}
+
+const mapDispatchToProps = (dispatch) => ({
+    fetchProduct: () => { dispatch(fetchProduct()) },
+    fetchComments: () => { dispatch(fetchComments()) },
+    fetchPromotions: () => { dispatch(fetchPromotions()) },
+    resetFeedbackForm: () => { dispatch(actions.reset('feedback')) },
+    postComment: (productId, rating, author, comment) => dispatch(postComment(productId, rating, author, comment)),
+    postFeedback: (firstName, lastName, telNum, email, agree, contactType, message) => dispatch(postFeedback(firstName, lastName, telNum, email, agree, contactType, message)),
+    addToCart: (product, items) => dispatch(addToCart(product, items)),
+});
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ComponentWrapper));

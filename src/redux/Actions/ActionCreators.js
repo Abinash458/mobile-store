@@ -37,7 +37,7 @@ export const postComment = (productId, rating, author, comment) => (dispatch) =>
         .then(response => response.json())
         .then(response => dispatch(addComment(response)))
         .catch(error => {
-            console.log("post comments ", error.message)
+            // console.log("post comments ", error.message)
             alert("Your comment could not be posted\n Error: " + error.message);
         });
 }
@@ -130,27 +130,49 @@ export const addProducts = (products) => ({
 
 // Cart Function
 
-export const addToCart = (products, items) => (dispatch) => {
+export const addToCart = (product, items) => (dispatch) => {
     try {
         dispatch(cartLoading(true));
-        const cartItems = items.slice();
+        const cart = items;
 
-        const cart = cartItems.filter((cartProd) => cartProd.id === products.id);
-        if (cart) {
-            products.inCart = true;
-            products.count = 1;
-            const price = products.price;
-            products.total = price;
-            cart.push(products);
-        }
+        // const existingProductIndex = findProductIndex(cart, product.id);
+        product.count = 1;
+        const price = product.price;
+        product.total = price;
+        product.inCart = true;
 
-        localStorage.setItem("cartItems", JSON.stringify(cart));
-        dispatch(addCart(cart));
+        const updatedCart = [...cart, product];
+
+        // localStorage.setItem("cartItems", JSON.stringify(updatedCart));
+
+        dispatch(addCart(updatedCart));
+
     } catch (error) {
         dispatch(cartFailed(error))
     }
 }
 
+// const findProductIndex = (cart, productId) => {
+//     return cart.findIndex(p => p.id === productId);
+// }
+
+// const updatProductDetails = (cart, product) => {
+//     const productIndex = findProductIndex(cart, product.id);
+
+//     const updatedCart = [...cart];
+
+//     const existingProduct = updatedCart[productIndex];
+
+//     const updatedUnitsProduct = {
+//         ...existingProduct,
+//     };
+
+//     console.log(updatedUnitsProduct);
+
+//     updatedCart[productIndex] = updatedUnitsProduct;
+
+//     return updatedCart;
+// }
 
 
 export const cartLoading = () => ({
@@ -162,9 +184,9 @@ export const cartFailed = (errMess) => ({
     payload: errMess
 })
 
-export const addCart = (cartItems) => ({
+export const addCart = (updatedCart) => ({
     type: ActionTypes.ADD_TO_CART,
-    payload: cartItems,
+    payload: updatedCart,
 });
 
 // Fetch Comments

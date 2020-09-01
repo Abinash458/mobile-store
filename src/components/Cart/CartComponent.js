@@ -9,7 +9,7 @@ import CartList from "./components/CartList";
 import CartTotals from "./components/CartTotals";
 
 const CartComponent = (props) => {
-    if (props.cartItems.length > 0) {
+    if (props.cart.length > 0) {
         return (
             <React.Fragment>
                 <div className="py-5">

@@ -1,14 +1,14 @@
 import * as ActionTypes from '../Actions/ActionTypes';
 
-const cartItems = localStorage.getItem("cartItems")
-    ? JSON.parse(localStorage.getItem("cartItems"))
-    : [];
+// const cartItems = localStorage.getItem("cartItems")
+//     ? JSON.parse(localStorage.getItem("cartItems"))
+//     : [];
 
-export default function (state = {
+export const Cart = (state = {
     isLoading: true,
     errMess: null,
-    cart: cartItems
-}, action) {
+    cart: []
+}, action) => {
     switch (action.type) {
         case ActionTypes.ADD_TO_CART:
             return { ...state, isLoading: false, errMess: null, cart: action.payload }
