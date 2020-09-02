@@ -4,7 +4,10 @@ import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { actions } from 'react-redux-form';
 
-import { postComment, postFeedback, fetchProduct, fetchComments, addToCart, fetchPromotions } from '../../redux/Actions/ActionCreators';
+import { fetchProduct, fetchPromotions } from '../../redux/Actions/ActionCreators';
+import { postFeedback } from '../../redux/Actions/FeedbackAction';
+import { postComment, fetchComments } from '../../redux/Actions/CommentAction';
+import { addToCart, increment, decrement, removeItem } from '../../redux/Actions/CartAction';
 
 import Header from '../Header/Header';
 import Home from '../Home/Home';
@@ -16,64 +19,14 @@ import CartComponent from '../Cart/CartComponent';
 
 class ComponentWrapper extends Component {
 
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {
-    //         cart: []
-    //     }
-    // }
-
-
     componentDidMount() {
         this.props.fetchProduct()
         this.props.fetchComments()
         this.props.fetchPromotions()
     }
 
-    // handleAddToCart = (product) => {
-    //     // const existingProductIndex = this.state.cart.findIndex(ep => ep.id === product.id);
-    //     // if (existingProductIndex >= 0) {
-
-    //     //     const cartProducts = this.state.cart.slice();
-
-    //     //     const existingProduct = cartProducts[existingProductIndex];
-
-    //     //     product.inCart = true;
-    //     //     product.count = 1;
-    //     //     const price = product.price;
-    //     //     product.total = price;
-    //     //     this.setState(
-    //     //         () => {
-    //     //             return {
-    //     //                 cart: existingProduct
-    //     //             };
-    //     //         }
-    //     //     );
-    //     // }
-    //     // else {
-    //     //     this.setState(
-    //     //         () => {
-    //     //             return {
-    //     //                 cart: [...this.state.cart, product],
-    //     //             };
-    //     //         }
-    //     //     );
-    //     // }
-    //     product.inCart = true;
-    //     product.count = 1;
-    //     const price = product.price;
-    //     product.total = price;
-    //     this.setState(
-    //         () => {
-    //             return {
-    //                 cart: [...this.state.cart, product],
-    //             };
-    //         }
-    //     );
-    // }
-
     render() {
-        // console.log("Cart", this.props.cart.cart)
+        // console.log("increment==>", this.props.incre)
         const HomePage = () => {
             return (
                 <Home featuredProduct={this.props.products.products.filter((product) => product.featured)[0]}
@@ -98,7 +51,6 @@ class ComponentWrapper extends Component {
                     postComment={this.props.postComment}
                     addToCart={this.props.addToCart}
                     cartItems={this.props.cart.cart}
-                // handleAddToCart={this.handleAddToCart}
                 />
             );
         }
@@ -106,6 +58,9 @@ class ComponentWrapper extends Component {
         const CartWithId = () => {
             return (
                 <CartComponent
+                    increment={this.props.increment}
+                    decrement={this.props.decrement}
+                    removeItem={this.props.removeItem}
                     cart={this.props.cart.cart}
                 />
             )
@@ -133,7 +88,10 @@ const mapStateToProps = state => {
         products: state.products,
         comments: state.comments,
         promotions: state.promotions,
-        cart: state.cart
+        cart: state.cart,
+        incre: state.increment.incre,
+        decre: state.decrement.decre,
+        removeProduct: state.removeItem.removeProduct,
     }
 }
 
@@ -145,6 +103,9 @@ const mapDispatchToProps = (dispatch) => ({
     postComment: (productId, rating, author, comment) => dispatch(postComment(productId, rating, author, comment)),
     postFeedback: (firstName, lastName, telNum, email, agree, contactType, message) => dispatch(postFeedback(firstName, lastName, telNum, email, agree, contactType, message)),
     addToCart: (product, items) => dispatch(addToCart(product, items)),
+    increment: (id, cart) => dispatch(increment(id, cart)),
+    decrement: (id, cart) => dispatch(decrement(id, cart)),
+    removeItem: (id, cart, product) => dispatch(removeItem(id, cart, product)),
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ComponentWrapper));

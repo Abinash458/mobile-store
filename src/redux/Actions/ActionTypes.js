@@ -15,5 +15,12 @@ export const ADD_TO_CART = 'ADD_TO_CART';
 export const CART_LOADING = 'CART_LOADING';
 export const CART_FAILED = 'CART_FAILED';
 
+export const INCREMENT = 'INCREMENT';
+export const INCREMENT_FAILED = 'INCREMENT_FAILED';
 
-export const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
+export const DECREMENT = 'DECREMENT';
+export const DECREMENT_FAILED = 'DECREMENT_FAILED';
+
+export const REMOVE_ITEM = 'REMOVE_ITEM';
+export const REMOVE_ITEM_FAILED = 'REMOVE_ITEM_FAILED';
+
