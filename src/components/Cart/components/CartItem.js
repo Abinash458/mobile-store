@@ -4,7 +4,6 @@ import { baseUrl } from "../../../shared/baseUrl";
 const CartItem = (props) => {
     const { id, title, image, price, total, count } = props.item;
     const { increment, decrement, removeItem } = props;
-    // console.log(props.cart)
     return (
         <div className="row py-4 text-capitalize text-center text-white">
             <div className="col-10 mx-auto col-lg-2 d-flex justify-content-center align-items-center">

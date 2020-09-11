@@ -26,7 +26,7 @@ class ComponentWrapper extends Component {
     }
 
     render() {
-        // console.log("increment==>", this.props.incre)
+        // console.log("remove==>", this.props.removeProduct)
         const HomePage = () => {
             return (
                 <Home featuredProduct={this.props.products.products.filter((product) => product.featured)[0]}
@@ -91,7 +91,6 @@ const mapStateToProps = state => {
         cart: state.cart,
         incre: state.increment.incre,
         decre: state.decrement.decre,
-        removeProduct: state.removeItem.removeProduct,
     }
 }
 

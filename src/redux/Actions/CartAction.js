@@ -36,7 +36,6 @@ export const addCart = (updatedCart) => ({
     payload: updatedCart,
 });
 
-
 // INCREMENT FUNCTION
 export const increment = (id, cart) => (dispatch) => {
     try {
@@ -75,7 +74,8 @@ export const decrement = (id, cart) => (dispatch) => {
         product.count = product.count - 1;
 
         if (product.count === 0) {
-            removeItem(id);
+            dispatch(removeItem(id, cart));
+
         } else {
             product.total = product.count * product.price;
         }
@@ -99,31 +99,35 @@ export const decrementFailed = (errMess) => ({
 })
 
 // Remove Item Function
-export const removeItem = (id, cart, product) => (dispatch) => {
+
+const getItem = (id, products) => {
+    const product = products.find((item) => item.id === id);
+    return product;
+};
+
+export const removeItem = (id, item, product) => (dispatch) => {
     try {
-        let tempProducts = product;
-        let tempCart = cart;
-        tempCart = tempCart.filter((item) => item.id !== id);
-        // const prod = product.find((items) => items.id === id);
-        // const index = tempProducts.indexOf(prod);
-        // console.log(index)
-        // let removedProducts = tempProducts[index];
-        tempProducts.inCart = false;
-        tempProducts.count = 0;
-        tempProducts.total = 0;
+        let tempProducts = [product];
+        let cart = item;
+        cart = cart.slice().filter(a => a.id !== id);
+        const index = tempProducts.indexOf(getItem(id, tempProducts));
+        let removedProducts = tempProducts[index];
+        removedProducts.inCart = false;
+        removedProducts.count = 0;
+        removedProducts.total = 0;
 
-        const updatedCartProduct = [...tempCart, tempProducts]
+        const updatedCart = cart;
 
-        dispatch(removeProd(updatedCartProduct))
+        dispatch(removeProd(updatedCart))
 
     } catch (error) {
         dispatch(removeProdFailed(error))
     }
 }
 
-export const removeProd = (updatedCartProduct) => ({
+export const removeProd = (updatedCart) => ({
     type: ActionTypes.REMOVE_ITEM,
-    payload: updatedCartProduct,
+    payload: updatedCart,
 })
 
 export const removeProdFailed = (errMess) => ({

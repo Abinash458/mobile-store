@@ -19,6 +19,12 @@ export const Cart = (state = {
         case ActionTypes.CART_FAILED:
             return { ...state, isLoading: false, errMess: action.payload, cart: [] }
 
+        case ActionTypes.REMOVE_ITEM:
+            return { ...state, isLoading: false, errMess: null, cart: action.payload }
+
+        case ActionTypes.REMOVE_ITEM_FAILED:
+            return { ...state, isLoading: false, errMess: action.payload, cart: [] }
+
         default:
             return state;
     }
@@ -58,19 +64,19 @@ export const Decrement = (state = {
     }
 }
 
-export const RemoveItem = (state = {
-    isLoading: true,
-    errMess: null,
-    removeProduct: []
-}, action) => {
-    switch (action.type) {
-        case ActionTypes.REMOVE_ITEM:
-            return { ...state, isLoading: false, errMess: null, removeProduct: action.payload }
+// export const RemoveItem = (state = {
+//     isLoading: true,
+//     errMess: null,
+//     removeProduct: []
+// }, action) => {
+//     switch (action.type) {
+//         case ActionTypes.REMOVE_ITEM:
+//             return { ...state, isLoading: false, errMess: null, removeProduct: action.payload }
 
-        case ActionTypes.REMOVE_ITEM_FAILED:
-            return { ...state, isLoading: false, errMess: action.removeProduct, decre: [] }
+//         case ActionTypes.REMOVE_ITEM_FAILED:
+//             return { ...state, isLoading: false, errMess: action.payload, removeProduct: [] }
 
-        default:
-            return state;
-    }
-}
+//         default:
+//             return state;
+//     }
+// }
