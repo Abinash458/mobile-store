@@ -15,6 +15,7 @@ export const addToCart = (product, items) => (dispatch) => {
 
         // localStorage.setItem("cartItems", JSON.stringify(updatedCart));
 
+        dispatch(addTotals(updatedCart));
         dispatch(addCart(updatedCart));
 
     } catch (error) {
@@ -48,6 +49,7 @@ export const increment = (id, cart) => (dispatch) => {
         const updatedCartProduct = [...tempCart];
 
         dispatch(incrementCart(updatedCartProduct))
+        dispatch(addTotals(updatedCartProduct));
     } catch (error) {
         dispatch(incrementFailed(error))
     }
@@ -64,17 +66,18 @@ export const incrementCart = (updatedCartProduct) => ({
 });
 
 // DECREMENT FUNCTION
-export const decrement = (id, cart) => (dispatch) => {
+export const decrement = (id, cart, products) => (dispatch) => {
     try {
 
         let tempCart = cart;
+        let tempProduct = products;
         const seletedItem = tempCart.find((item) => item.id === id);
         const index = tempCart.indexOf(seletedItem);
         const product = tempCart[index];
         product.count = product.count - 1;
 
         if (product.count === 0) {
-            dispatch(removeItem(id, cart));
+            dispatch(removeItem(id, cart, tempProduct));
 
         } else {
             product.total = product.count * product.price;
@@ -82,7 +85,10 @@ export const decrement = (id, cart) => (dispatch) => {
 
         const updatedCartProduct = [...tempCart];
 
-        dispatch(decrementCart(updatedCartProduct))
+        dispatch(decrementCart(updatedCartProduct));
+        dispatch(addTotals(updatedCartProduct));
+
+
     } catch (error) {
         dispatch(decrementFailed(error))
     }
@@ -132,5 +138,61 @@ export const removeProd = (updatedCart) => ({
 
 export const removeProdFailed = (errMess) => ({
     type: ActionTypes.REMOVE_ITEM_FAILED,
+    payload: errMess,
+})
+
+// CLEAR CART
+
+export const clearCart = () => (dispatch) => {
+    try {
+        let cart = [];
+        const updatedCart = cart;
+        dispatch(cartClear(updatedCart))
+        dispatch(addTotals(updatedCart));
+
+    } catch (error) {
+        dispatch(cartClearFailed(error))
+    }
+}
+
+export const cartClear = (updatedCart) => ({
+    type: ActionTypes.CLEAR_CART,
+    payload: updatedCart,
+})
+
+export const cartClearFailed = (errMess) => ({
+    type: ActionTypes.CLEAR_CART_FAILED,
+    payload: errMess,
+})
+
+// ADD TOTALS & TAX
+
+export const addTotals = (updatedCart) => (dispatch) => {
+    try {
+        let subTotal = 0;
+        updatedCart.map((item) => (subTotal += item.total));
+        const tempTax = subTotal * 0.05;
+        const tax = parseFloat(tempTax.toFixed(2));
+        const allTotal = subTotal + tax;
+
+        const total = {
+            cartSubTotal: subTotal,
+            cartTax: tax,
+            cartTotal: allTotal
+        };
+        dispatch(totalAdd(total))
+
+    } catch (error) {
+        dispatch(totalAddFailed(error))
+    }
+}
+
+export const totalAdd = (total) => ({
+    type: ActionTypes.ADD_TOTALS,
+    payload: total,
+})
+
+export const totalAddFailed = (errMess) => ({
+    type: ActionTypes.ADD_TOTALS_FAILED,
     payload: errMess,
 })

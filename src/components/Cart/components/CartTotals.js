@@ -1,22 +1,20 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 const CartTotals = (props) => {
-    const { cartSubTotal, cartTax, cartTotal, clearCart } = props;
+    const { clearCart } = props;
+    const { cartSubTotal, cartTax, cartTotal } = props.totalPrice;
     return (
         <React.Fragment>
             <div className="container">
                 <div className="row">
                     <div className="col-10 mt-2 ml-sm-5 ml-md-auto col-sm-6 text-capitalize text-right text-white">
-                        <Link to="/">
-                            <button
-                                onClick={() => clearCart()}
-                                className="btn btn-outline-danger text-uppercase mb-3 px-5"
-                                type="button"
-                            >
-                                clear cart
+                        <button
+                            onClick={() => clearCart()}
+                            className="btn btn-outline-danger text-uppercase mb-3 px-5"
+                            type="button"
+                        >
+                            clear cart
                             </button>
-                        </Link>
                         <h5>
                             <span className="text-title">
                                 subtotal :{" "}
@@ -33,7 +31,7 @@ const CartTotals = (props) => {
                                 </span>
                             </span>
                         </h5>
-                        <div className="my-3" style={{ borderTop: "1px dashed black" }} />
+                        <div className="my-3" style={{ borderTop: "1px dashed white" }} />
                         <h5>
                             <span className="text-title">
                                 total :{" "}

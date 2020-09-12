@@ -25,7 +25,7 @@ const CartItem = (props) => {
             <div className="col-10 mx-auto col-lg-2 my-2 my-lg-0 d-flex justify-content-center align-items-center">
                 <div className="d-flex justify-content-center">
                     <div>
-                        <span className="btn btn-black mx-1" onClick={() => decrement(id, props.cart)}>
+                        <span className="btn btn-black mx-1" onClick={() => decrement(id, props.cart, props.item)}>
                             -
                         </span>
                         <span className="btn btn-black mx-1">{count}</span>

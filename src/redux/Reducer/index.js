@@ -4,7 +4,7 @@ import { createForms } from 'react-redux-form';
 import { Products } from './productsReducer';
 import { Comments } from './commentsReducer';
 import { Promotion } from './promotionReducer';
-import { Cart, Increment, Decrement } from './cartReducer';
+import { Cart, Increment, Decrement, TotalPrice } from './cartReducer';
 import { InitialFeedback } from './FormsReducer';
 
 export default combineReducers({
@@ -12,7 +12,7 @@ export default combineReducers({
     cart: Cart,
     increment: Increment,
     decrement: Decrement,
-    // removeItem: RemoveItem,
+    total: TotalPrice,
     comments: Comments,
     promotions: Promotion,
     ...createForms({

@@ -160,7 +160,6 @@ const ProductDetail = (props) => {
                                         onClick={() =>
                                             props.addToCart(props.product, props.cartItems)
                                             // toggleModal();
-                                            // props.handleAddToCart(props.product)
                                         }
                                     >
                                         {props.product.inCart ? "inCart" : "add to cart"}

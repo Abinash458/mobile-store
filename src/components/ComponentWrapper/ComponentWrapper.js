@@ -7,7 +7,7 @@ import { actions } from 'react-redux-form';
 import { fetchProduct, fetchPromotions } from '../../redux/Actions/ActionCreators';
 import { postFeedback } from '../../redux/Actions/FeedbackAction';
 import { postComment, fetchComments } from '../../redux/Actions/CommentAction';
-import { addToCart, increment, decrement, removeItem } from '../../redux/Actions/CartAction';
+import { addToCart, increment, decrement, removeItem, clearCart, addTotals } from '../../redux/Actions/CartAction';
 
 import Header from '../Header/Header';
 import Home from '../Home/Home';
@@ -26,7 +26,7 @@ class ComponentWrapper extends Component {
     }
 
     render() {
-        // console.log("remove==>", this.props.removeProduct)
+        // console.log("totalPrice==>", this.props.totalPrice)
         const HomePage = () => {
             return (
                 <Home featuredProduct={this.props.products.products.filter((product) => product.featured)[0]}
@@ -61,7 +61,9 @@ class ComponentWrapper extends Component {
                     increment={this.props.increment}
                     decrement={this.props.decrement}
                     removeItem={this.props.removeItem}
+                    clearCart={this.props.clearCart}
                     cart={this.props.cart.cart}
+                    totalPrice={this.props.totalPrice}
                 />
             )
         }
@@ -91,6 +93,7 @@ const mapStateToProps = state => {
         cart: state.cart,
         incre: state.increment.incre,
         decre: state.decrement.decre,
+        totalPrice: state.total.totalPrice,
     }
 }
 
@@ -103,8 +106,11 @@ const mapDispatchToProps = (dispatch) => ({
     postFeedback: (firstName, lastName, telNum, email, agree, contactType, message) => dispatch(postFeedback(firstName, lastName, telNum, email, agree, contactType, message)),
     addToCart: (product, items) => dispatch(addToCart(product, items)),
     increment: (id, cart) => dispatch(increment(id, cart)),
-    decrement: (id, cart) => dispatch(decrement(id, cart)),
+    decrement: (id, cart, product) => dispatch(decrement(id, cart, product)),
     removeItem: (id, cart, product) => dispatch(removeItem(id, cart, product)),
+    clearCart: () => dispatch(clearCart()),
+    addTotals: () => dispatch(addTotals()),
+
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ComponentWrapper));

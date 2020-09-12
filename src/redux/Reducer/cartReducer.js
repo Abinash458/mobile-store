@@ -25,6 +25,12 @@ export const Cart = (state = {
         case ActionTypes.REMOVE_ITEM_FAILED:
             return { ...state, isLoading: false, errMess: action.payload, cart: [] }
 
+        case ActionTypes.CLEAR_CART:
+            return { ...state, isLoading: false, errMess: null, cart: action.payload }
+
+        case ActionTypes.CLEAR_CART_FAILED:
+            return { ...state, isLoading: false, errMess: action.payload, cart: [] }
+
         default:
             return state;
     }
@@ -64,19 +70,29 @@ export const Decrement = (state = {
     }
 }
 
-// export const RemoveItem = (state = {
-//     isLoading: true,
-//     errMess: null,
-//     removeProduct: []
-// }, action) => {
-//     switch (action.type) {
-//         case ActionTypes.REMOVE_ITEM:
-//             return { ...state, isLoading: false, errMess: null, removeProduct: action.payload }
+export const TotalPrice = (state = {
+    isLoading: true,
+    errMess: null,
+    totalPrice: {
+        cartSubTotal: 0,
+        cartTax: 0,
+        cartTotal: 0,
+    }
+}, action) => {
+    switch (action.type) {
+        case ActionTypes.ADD_TOTALS:
+            return { ...state, isLoading: false, errMess: null, totalPrice: action.payload }
 
-//         case ActionTypes.REMOVE_ITEM_FAILED:
-//             return { ...state, isLoading: false, errMess: action.payload, removeProduct: [] }
+        case ActionTypes.ADD_TOTALS_FAILED:
+            return {
+                ...state, isLoading: false, errMess: action.payload, totalPrice: {
+                    cartSubTotal: 0,
+                    cartTax: 0,
+                    cartTotal: 0,
+                }
+            }
 
-//         default:
-//             return state;
-//     }
-// }
+        default:
+            return state;
+    }
+}

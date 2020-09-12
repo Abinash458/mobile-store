@@ -24,3 +24,10 @@ export const DECREMENT_FAILED = 'DECREMENT_FAILED';
 export const REMOVE_ITEM = 'REMOVE_ITEM';
 export const REMOVE_ITEM_FAILED = 'REMOVE_ITEM_FAILED';
 
+export const CLEAR_CART = 'CLEAR_CART';
+export const CLEAR_CART_FAILED = 'CLEAR_CART_FAILED';
+
+export const ADD_TOTALS = 'ADD_TOTALS';
+export const ADD_TOTALS_FAILED = 'ADD_TOTALS_FAILED';
+
+
