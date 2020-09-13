@@ -1,6 +1,6 @@
 import React from 'react';
-import { Link } from "react-router-dom";
-import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
+// import { Link } from "react-router-dom";
+// import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import Loading from '../Loading/LoadingComponent';
 import Product from '../Product/Product';
 
@@ -33,7 +33,7 @@ const ProductList = (props) => {
                 <div className="py-5">
                     <div className="container">
                         <div className="row">
-                            <Breadcrumb>
+                            {/* <Breadcrumb>
                                 <BreadcrumbItem>
                                     <Link to="/home"> Home
                                     </Link>
@@ -41,7 +41,7 @@ const ProductList = (props) => {
                                 <BreadcrumbItem active>
                                     Shop
                                 </BreadcrumbItem>
-                            </Breadcrumb>
+                            </Breadcrumb> */}
                             <div className="col-12 text-white">
                                 <h3>Shop</h3>
                                 <hr />

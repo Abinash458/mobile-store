@@ -1,17 +1,14 @@
 import React, { Component } from 'react';
-import { Navbar, NavbarBrand, Nav, NavbarToggler, Collapse, NavItem, Jumbotron, Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Navbar, NavbarBrand, Nav, NavbarToggler, Collapse, NavItem, Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input } from 'reactstrap';
 import { NavLink, Link } from 'react-router-dom';
 import { ButtonContainer } from '../StyledComponents/Button';
 
 
 export default class Header extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            isNavOpen: false,
-            isLoginModalOpen: false
-        }
+    state = {
+        isNavOpen: false,
+        isLoginModalOpen: false
     }
 
     toggleNav = () => {
@@ -68,7 +65,7 @@ export default class Header extends Component {
                         </Collapse>
                     </div>
                 </Navbar>
-                <Jumbotron>
+                {/* <Jumbotron>
                     <div className="container">
                         <div className="row row-header">
                             <div className="col-12 col-sm-6">
@@ -77,7 +74,7 @@ export default class Header extends Component {
                             </div>
                         </div>
                     </div>
-                </Jumbotron>
+                </Jumbotron> */}
                 <Modal isOpen={this.state.isLoginModalOpen} toggle={this.toggleLoginModal}>
                     <ModalHeader toggle={this.toggleLoginModal}>Login</ModalHeader>
                     <ModalBody>

@@ -2,6 +2,7 @@ import React from 'react';
 import styled from "styled-components";
 import Loading from '../Loading/LoadingComponent';
 import { baseUrl } from '../../shared/baseUrl';
+import { Jumbotron } from 'reactstrap';
 
 function RenderCard({ item, isLoading, errMess }) {
     if (isLoading) {
@@ -38,20 +39,32 @@ function RenderCard({ item, isLoading, errMess }) {
 
 function Home(props) {
     return (
-        <div className="container">
-            <div className="row align-item-center">
-                <div className="col-12 col-md">
-                    <RenderCard
-                        item={props.featuredProduct}
-                        isLoading={props.productsLoading}
-                        errMess={props.productsErrMess} />
+        <div>
+            <Jumbotron>
+                <div className="container">
+                    <div className="row row-header">
+                        <div className="col-12 col-sm-6">
+                            <h1>Product Catalog</h1>
+                            <p>We are having the best range of cell phones. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        </div>
+                    </div>
                 </div>
-                <div className="col-12 col-md">
-                    <RenderCard
-                        item={props.featuredPromotion}
-                        isLoading={props.promotionsLoading}
-                        errMess={props.promotionsErrMess}
-                    />
+            </Jumbotron>
+            <div className="container">
+                <div className="row align-item-center">
+                    <div className="col-12 col-md">
+                        <RenderCard
+                            item={props.featuredProduct}
+                            isLoading={props.productsLoading}
+                            errMess={props.productsErrMess} />
+                    </div>
+                    <div className="col-12 col-md">
+                        <RenderCard
+                            item={props.featuredPromotion}
+                            isLoading={props.promotionsLoading}
+                            errMess={props.promotionsErrMess}
+                        />
+                    </div>
                 </div>
             </div>
         </div>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
+// import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 
 import { ButtonContainer } from '../StyledComponents/Button';
 import Modal from "../Cart/components/GotoCartModal";
@@ -116,14 +116,14 @@ const ProductDetail = (props) => {
                 <div className="py-4">
                     <div className="container">
                         <div className="row">
-                            <Breadcrumb>
+                            {/* <Breadcrumb>
                                 <BreadcrumbItem>
                                     <Link to="/shop">Shop</Link>
                                 </BreadcrumbItem>
                                 <BreadcrumbItem active>
                                     {props.product.title}
                                 </BreadcrumbItem>
-                            </Breadcrumb>
+                            </Breadcrumb> */}
                             <div className="col-12 text-white">
                                 <h3>{props.product.title}</h3>
                                 <hr />
@@ -169,7 +169,13 @@ const ProductDetail = (props) => {
                                     >
                                         Add Comment
                                     </ButtonContainer>
-
+                                    <Link to="/shop">
+                                        <ButtonContainer
+                                            cart
+                                        >
+                                            Back To Shop
+                                    </ButtonContainer>
+                                    </Link>
                                 </div>
                             </div>
                         </div>
