@@ -16,6 +16,8 @@ You have to install Json Server globally in your system by using the below comma
 On a terminal go to the **Mobile-Store-JsonServer** folder and to **start** the json-server type
 **json-server --watch db.json -d 2000 -p 3001**
 
+![alt text](https://github.com/Abinash458/mobile-store/blob/master/ReadmeImage/json-server.png)
+
 Open another terminal and go to the project folder which name is **mobile-store**
 
 first of all run the command **npm install** to download all the dependencies use by this project
