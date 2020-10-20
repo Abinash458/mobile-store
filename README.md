@@ -23,3 +23,5 @@ Open another terminal and go to the project folder which name is **mobile-store*
 first of all run the command **npm install** to download all the dependencies use by this project.
 
 then finally run **npm start** to run the project.
+
+![alt text](https://github.com/Abinash458/mobile-store/blob/master/ReadmeImage/mobile-store.png)
