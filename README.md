@@ -1,5 +1,7 @@
 # Mobile Store
 
+It is a mobile shopping cart using Redux also i am using a json-server locally to store some data.
+
 ## How to Run this Project
 
 First of all clone this project by using this command 
