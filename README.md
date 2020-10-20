@@ -25,3 +25,7 @@ first of all run the command **npm install** to download all the dependencies us
 then finally run **npm start** to run the project.
 
 ![alt text](https://github.com/Abinash458/mobile-store/blob/master/ReadmeImage/mobile-store.png)
+
+and **BOOM!!**
+
+![alt text](https://github.com/Abinash458/mobile-store/blob/master/ReadmeImage/home.png)
